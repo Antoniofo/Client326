@@ -15,4 +15,12 @@ public interface ItfIhmCtrl {
 	public void startIhm();
 
 	public void showImage(WritableImage wr);
+
+	void showClient(String username, String password);
+
+	void showLogin();
+
+	String getUser();
+
+	void setAdmin(boolean b);
 }

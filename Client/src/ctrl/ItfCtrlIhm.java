@@ -8,7 +8,7 @@ package ctrl;
  */
 public interface ItfCtrlIhm {
 
-	public void logIn();
+	public void logIn(String username, String password);
 
 	public void logOut();
 

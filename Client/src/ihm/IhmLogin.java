@@ -17,10 +17,17 @@ import javax.swing.SwingUtilities;
 
 
 public class IhmLogin implements Initializable {
+    private Stage stage;
     @javafx.fxml.FXML
     private TextField txtfLogin;
     @javafx.fxml.FXML
     private TextField txtf;
+
+    private Ihm link;
+
+    public void setLink(Ihm link) {
+        this.link = link;
+    }
 
     private final String fxml = "/ihm/Login.fxml";
 
@@ -43,7 +50,7 @@ public class IhmLogin implements Initializable {
             // Accède au dispatcher thread tant aimé par JavaFX
             Platform.runLater(() -> {
                 try {
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 
                     fxmlLoader.setControllerFactory(controllerFactory);
@@ -64,13 +71,17 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        IhmClientUser rr = new IhmClientUser();
-        rr.start();
+        quit();
+        link.showClient(txtfLogin.getText(), txtf.getText());
     }
 
     public void register(ActionEvent actionEvent) {
-        IhmRegister reg = new IhmRegister();
-        reg.start();
+        quit();
+        link.showRegister();
+    }
+
+    public void quit(){
+        stage.close();
     }
 }
 

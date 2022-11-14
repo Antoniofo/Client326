@@ -15,5 +15,8 @@ public interface ItfCtrlWrk {
     public void handleHumidity(double humdity);
     
     public void handleFrame(WritableImage wr);
-       
+
+    String getCurrentUser();
+
+    void upgradeUser();
 }

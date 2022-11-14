@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Ihm implements ItfIhmCtrl {
 
+	private String user;
 	private boolean isAdmin;
 	public IhmClientAdmin ihmClientAdmin;
 	public IhmClientUser ihmClientUser;
@@ -30,6 +31,13 @@ public class Ihm implements ItfIhmCtrl {
 		ihmError = new IhmError();
 		ihmClientUser = new IhmClientUser();
 		ihmRegister = new IhmRegister();
+
+		ihmClientAdmin.setLink(this);
+		ihmLogin.setLink(this);
+		ihmError.setLink(this);
+		ihmRegister.setLink(this);
+		ihmClientUser.setLink(this);
+
 	}
 
     public void setRefCtrl(ItfCtrlIhm refCtrl) {
@@ -56,6 +64,35 @@ public class Ihm implements ItfIhmCtrl {
 				ihmClientUser.showImage(wr);
 			}
 		}
+	}
+
+	@Override
+	public void setAdmin(boolean admin) {
+		isAdmin = admin;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
+	public void showClient(String username, String password) {
+		refCtrl.logIn(username, password);
+
+		if(isAdmin){
+
+			ihmClientAdmin.start();
+		}else{
+			ihmClientUser.start();
+		}
+		user = username;
+	}
+
+
+	@Override
+	public void showLogin() {
+		ihmLogin.start();
 	}
 
 	public void showRegister(){

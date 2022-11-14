@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class IhmRegister
 {
+    private Stage stage;
     private final String fxml = "/ihm/Register.fxml";
     @javafx.fxml.FXML
     private TextField txtfUsername;
@@ -22,6 +23,11 @@ public class IhmRegister
     private TextField txtfPassword;
     @javafx.fxml.FXML
     private TextField txtfConfirmPassword;
+    private Ihm link;
+
+    public void setLink(Ihm link) {
+        this.link = link;
+    }
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -41,7 +47,7 @@ public class IhmRegister
             // Accède au dispatcher thread tant aimé par JavaFX
             Platform.runLater(() -> {
                 try {
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 
                     fxmlLoader.setControllerFactory(controllerFactory);
@@ -61,6 +67,9 @@ public class IhmRegister
         });
     }
 
-    public void register(ActionEvent actionEvent) {
+    public void quit(){
+        stage.close();
+    }
+    public void registerAccount(ActionEvent actionEvent) {
     }
 }

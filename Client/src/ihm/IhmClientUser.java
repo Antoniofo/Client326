@@ -19,6 +19,7 @@ import java.io.IOException;
 
 public class IhmClientUser
 {
+    private Stage stage;
     private final String fxml = "/ihm/ClientUser.fxml";
     @javafx.fxml.FXML
     private ImageView screenRobot;
@@ -34,12 +35,19 @@ public class IhmClientUser
     private CheckBox cbxMicrophone;
     @javafx.fxml.FXML
     private CheckBox cbxSound;
+    private Ihm link;
+
+    public void setLink(Ihm link) {
+        this.link = link;
+    }
 
     @javafx.fxml.FXML
     public void initialize() {
     }
 
     public void logOut(ActionEvent actionEvent) {
+        stage.close();
+        link.showLogin();
     }
 
     public void disconnectController(ActionEvent actionEvent) {
@@ -68,7 +76,7 @@ public class IhmClientUser
             // Accède au dispatcher thread tant aimé par JavaFX
             Platform.runLater(() -> {
                 try {
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 
                     fxmlLoader.setControllerFactory(controllerFactory);
@@ -80,6 +88,7 @@ public class IhmClientUser
                     stage.setScene(scene);
                     stage.setTitle("Client User");
                     stage.show();
+
                 } catch (IOException ex) {
                     System.out.println("Can't start the IHM because : " + ex);
                     Platform.exit();

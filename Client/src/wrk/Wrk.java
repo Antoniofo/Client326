@@ -21,7 +21,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     public ItfCtrlWrk refCtrl;
 
 
-
     public WrkController wrkController;
     public WrkSocket wrkSocket;
 
@@ -41,14 +40,12 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
     /**
-     *
-     * @exception Throwable Throwable
+     * @throws Throwable Throwable
      */
     public void finalize()
             throws Throwable {
 
     }
-    
 
 
     public void connectToServer() {
@@ -61,18 +58,34 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     @Override
     public void receiveHumidity(double value) {
+        refCtrl.handleHumidity(value);
+        wrkSocket.sendHumidity(value);
     }
 
     @Override
     public void receiveRFID(String tag) {
+        if (tag.equals("")) {
+            wrkSocket.upgradeUser(refCtrl.getCurrentUser());
+        }
     }
 
     @Override
-    public void receiveTemperature(double temperature) {
-    }
-
-    @Override
-    public void receiveValidation(boolean ok) {
+    public void handleOrder(String message) {
+        String[] t = message.split(",");
+        switch (message) {
+            case "SuccessAdded":
+                break;
+            case "SuccessLogin":
+                if (t[1] == "1") {
+                    refCtrl.upgradeUser();
+                }
+                break;
+            case "Temperature":
+                if (t[1] == "1") {
+                    refCtrl.handleTemperature(Double.valueOf(t[1]));
+                }
+                break;
+        }
     }
 
     @Override
@@ -95,5 +108,9 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void setRefCtrl(ItfCtrlWrk refCtrl) {
         this.refCtrl = refCtrl;
+    }
+
+    public void checkLogin(String username, String password) {
+        wrkSocket.sendLoginCheck(username, password);
     }
 }//end Wrk

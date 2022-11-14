@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 public class IhmClientAdmin implements Initializable
 {
     private final String fxml = "/ihm/ClientAdmin.fxml";
+    private Stage stage;
     @javafx.fxml.FXML
     private ImageView screenRobot;
     @javafx.fxml.FXML
@@ -37,6 +38,10 @@ public class IhmClientAdmin implements Initializable
     private CheckBox ckbMicro;
     @javafx.fxml.FXML
     private CheckBox ckbSound;
+    private Ihm link;
+    public void setLink(Ihm link) {
+        this.link = link;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +49,7 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void logOut(ActionEvent actionEvent) {
+        stage.close();
     }
 
     public void disconnectController(ActionEvent actionEvent) {
@@ -71,7 +77,7 @@ public class IhmClientAdmin implements Initializable
             // Accède au dispatcher thread tant aimé par JavaFX
             Platform.runLater(() -> {
                 try {
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 
                     fxmlLoader.setControllerFactory(controllerFactory);

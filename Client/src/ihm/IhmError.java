@@ -15,9 +15,13 @@ import java.io.IOException;
 
 public class IhmError
 {
+    private Stage stage;
     private final String fxml = "/ihm/Error.fxml";
-    @javafx.fxml.FXML
-    private TextArea txtError;
+    private Ihm link;
+
+    public void setLink(Ihm link) {
+        this.link = link;
+    }
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -37,7 +41,7 @@ public class IhmError
             // Accède au dispatcher thread tant aimé par JavaFX
             Platform.runLater(() -> {
                 try {
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 
                     fxmlLoader.setControllerFactory(controllerFactory);
@@ -58,5 +62,8 @@ public class IhmError
     }
 
     public void tryAgain(ActionEvent actionEvent) {
+    }
+    public void quit(){
+        stage.close();
     }
 }

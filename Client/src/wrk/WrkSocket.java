@@ -1,8 +1,7 @@
 package wrk;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 /**
  * @author eggera
@@ -30,25 +29,89 @@ public class WrkSocket extends Thread {
 
     }
 
-    public void connect() {
+    private String readMessages() {
+        String message = null;
+        try {
+            message = in.readLine();
+        } catch (SocketTimeoutException ex) {
+        } catch (IOException ex) {
+        }
+        return message;
+    }
 
+    @Override
+    public void run() {
+        runing = true;
+        while(runing){
+            if(socket != null && in != null){
+                if(socket.isConnected()){
+                    String message = readMessages();
+                    if(message != null){
+                        refWrk.handleOrder(message);
+                    }
+                }
+            }
+            try {
+                sleep(10);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+    private void writeMessage(String message) {
+        if (out != null && message != null) {
+            try {
+                out.write(message +"\n");
+                out.flush();
+            } catch (IOException ex) {
+            }
+        }
+    }
+
+
+
+    public boolean connect(String IP, int port) {
+        try{
+            SocketAddress socketAddress  = new InetSocketAddress(InetAddress.getByName(IP), port);
+
+            socket = new Socket();
+            socket.connect(socketAddress, 1000);
+            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
     
-    public void sendUserRegistration(){
-        
+    public void sendUserRegistration(String username, String password, boolean isAdmin){
+        writeMessage(String.format("register,%s,%s,%s",username,password,isAdmin));
     }
     
-    public void sendLoginCheck(){
-        
+    public void sendLoginCheck(String username, String password){
+        writeMessage(String.format("checklogin,%s,%s",username,password));
     }
     
-    public void sendHumidity(){
-        
+    public void sendHumidity(double hum){
+        writeMessage(String.format("humidity,%s",hum));
     }
             
 
     public void disconnect() {
+        if(socket != null){
+            try{
+                socket.close();
+                socket = null;
+            } catch (IOException e) {
 
+            }
+        }
     }
 
+    public void upgradeUser(String currentUser) {
+        writeMessage(String.format("upgrade,%s",currentUser));
+    }
 }//end WrkSocket

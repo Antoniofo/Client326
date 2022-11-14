@@ -7,8 +7,5 @@ package wrk;
  */
 public interface ItfSocketWrk {
 
-    public void receiveTemperature(double temperature);
-
-    public void receiveValidation(boolean ok);
-
+    void handleOrder(String message);
 }
