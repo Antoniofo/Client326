@@ -1,5 +1,6 @@
 package ihm;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.embed.swing.JFXPanel;
 import javafx.util.Callback;
@@ -60,6 +61,16 @@ public class IhmLogin implements Initializable {
                 }
             });
         });
+    }
+
+    public void login(ActionEvent actionEvent) {
+        IhmClientUser rr = new IhmClientUser();
+        rr.start();
+    }
+
+    public void register(ActionEvent actionEvent) {
+        IhmRegister reg = new IhmRegister();
+        reg.start();
     }
 }
 

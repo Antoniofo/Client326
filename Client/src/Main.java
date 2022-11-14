@@ -11,6 +11,7 @@ public class Main {
         
         ctrl.setRefIhm(ihm);
         ctrl.setRefWrk(wrk);
+        wrk.setRefCtrl(ctrl);
         ihm.setRefCtrl(ctrl);
         ctrl.start();
     }

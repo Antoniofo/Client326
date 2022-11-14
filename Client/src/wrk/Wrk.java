@@ -2,7 +2,12 @@ package wrk;
 
 import beans.XboxButton;
 import ctrl.ItfCtrlWrk;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import org.openimaj.image.MBFImage;
+
+import java.awt.image.BufferedImage;
+import java.net.SocketException;
 
 /**
  * @author eggera
@@ -14,10 +19,24 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     public WrkPhidget wrkPhidget;
     public WrkUDP wrkUDP;
     public ItfCtrlWrk refCtrl;
+
+
+
     public WrkController wrkController;
     public WrkSocket wrkSocket;
 
     public Wrk() {
+        try {
+            wrkController = new WrkController();
+            wrkPhidget = new WrkPhidget();
+            wrkSocket = new WrkSocket();
+            wrkUDP = new WrkUDP();
+            wrkUDP.setRefWrk(this);
+            wrkUDP.start();
+        } catch (SocketException e) {
+
+        }
+
 
     }
 
@@ -30,20 +49,14 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     }
     
-    public boolean initializeWrk(){
-        return true;
-    }
+
 
     public void connectToServer() {
-
+        wrkSocket.start();
     }
 
     public void connectController() {
-
-    }
-
-    public void initializePhidget() {
-
+        wrkController.connectController();
     }
 
     @Override
@@ -51,7 +64,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
     @Override
-    public void receiveRFID() {
+    public void receiveRFID(String tag) {
     }
 
     @Override
@@ -68,7 +81,19 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
     @Override
-    public void receiveFrame(MBFImage frame) {
+    public void receiveFrame(BufferedImage image) {
+        WritableImage wr;
+        wr = new WritableImage(image.getWidth(), image.getHeight());
+        PixelWriter pw = wr.getPixelWriter();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                pw.setArgb(x, y, image.getRGB(x, y));
+            }
+        }
+        refCtrl.handleFrame(wr);
+    }
 
+    public void setRefCtrl(ItfCtrlWrk refCtrl) {
+        this.refCtrl = refCtrl;
     }
 }//end Wrk

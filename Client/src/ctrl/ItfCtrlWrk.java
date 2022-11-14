@@ -1,6 +1,7 @@
 package ctrl;
 
 
+import javafx.scene.image.WritableImage;
 import org.openimaj.image.MBFImage;
 
 /**
@@ -13,6 +14,6 @@ public interface ItfCtrlWrk {
     
     public void handleHumidity(double humdity);
     
-    public void handleFrame(MBFImage frame);
+    public void handleFrame(WritableImage wr);
        
 }

@@ -9,5 +9,5 @@ public interface ItfWrkPhidget {
 
     public void receiveHumidity(double value);
 
-    public void receiveRFID();
+    public void receiveRFID(String tag);
 }
