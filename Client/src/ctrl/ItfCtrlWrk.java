@@ -1,6 +1,8 @@
 package ctrl;
 
 
+import org.openimaj.image.MBFImage;
+
 /**
  * @author eggera
  * @version 1.0

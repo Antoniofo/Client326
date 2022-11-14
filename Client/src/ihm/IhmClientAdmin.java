@@ -1,10 +1,15 @@
 package ihm;
 
+import ctrl.Ctrl;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class IhmClientAdmin
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class IhmClientAdmin implements Initializable
 {
     @javafx.fxml.FXML
     private ImageView screenRobot;
@@ -21,6 +26,8 @@ public class IhmClientAdmin
     @javafx.fxml.FXML
     private CheckBox ckbSound;
 
-    @javafx.fxml.FXML
-    public void initialize() {
-    }}
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+}

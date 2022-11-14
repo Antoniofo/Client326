@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="OpenImaj">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/OpenImaj" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/OpenImaj" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib/OpenImaj" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/OpenImaj" recursive="false" type="SOURCES" />
+  </library>
+</component>

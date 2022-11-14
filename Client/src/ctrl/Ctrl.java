@@ -1,6 +1,7 @@
 package ctrl;
 
 import ihm.ItfIhmCtrl;
+import org.openimaj.image.MBFImage;
 import wrk.ItfWrkPhidget;
 import wrk.Wrk;
 
@@ -28,7 +29,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
     
     public void start(){
-        
+        refIhm.startIhm();
     }
 
     @Override
@@ -61,5 +62,13 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public void handleFrame(MBFImage frame) {
+    }
+
+    public void setRefIhm(ItfIhmCtrl refIhm) {
+        this.refIhm = refIhm;
+    }
+
+    public void setRefWrk(Wrk refWrk) {
+        this.refWrk = refWrk;
     }
 }//end Ctrl
