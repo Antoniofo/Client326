@@ -1,7 +1,9 @@
 package ihm;
 
 import ctrl.ItfCtrlIhm;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.image.WritableImage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Ihm implements ItfIhmCtrl {
 
+	private boolean isAdmin;
 	public IhmClientAdmin ihmClientAdmin;
 	public IhmClientUser ihmClientUser;
 	public IhmError ihmError;
@@ -21,7 +24,12 @@ public class Ihm implements ItfIhmCtrl {
 	public ItfCtrlIhm refCtrl;	
 
 	public Ihm(){
+		isAdmin = false;
 		ihmLogin = new IhmLogin();
+		ihmClientAdmin = new IhmClientAdmin();
+		ihmError = new IhmError();
+		ihmClientUser = new IhmClientUser();
+		ihmRegister = new IhmRegister();
 	}
 
     public void setRefCtrl(ItfCtrlIhm refCtrl) {
@@ -32,10 +40,29 @@ public class Ihm implements ItfIhmCtrl {
 
 	}
 	public void quit(){
-
+		Platform.exit();
 	}
 
 	public void startIhm(){
 		ihmLogin.start();
+	}
+
+	@Override
+	public void showImage(WritableImage wr) {
+		if(wr != null){
+			if(isAdmin){
+				ihmClientAdmin.showImage(wr);
+			}else{
+				ihmClientUser.showImage(wr);
+			}
+		}
+	}
+
+	public void showRegister(){
+		ihmRegister.start();
+	}
+
+	public void showError(){
+		ihmError.start();
 	}
 }//end Ihm

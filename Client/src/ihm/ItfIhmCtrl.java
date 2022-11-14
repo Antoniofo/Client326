@@ -1,6 +1,8 @@
 package ihm;
 
 
+import javafx.scene.image.WritableImage;
+
 /**
  * @author eggera
  * @version 1.0
@@ -12,4 +14,5 @@ public interface ItfIhmCtrl {
 
 	public void startIhm();
 
+	public void showImage(WritableImage wr);
 }

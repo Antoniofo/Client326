@@ -1,6 +1,11 @@
 package ctrl;
 
+<<<<<<< Updated upstream
 
+=======
+import ihm.ItfIhmCtrl;
+import javafx.scene.image.WritableImage;
+>>>>>>> Stashed changes
 import org.openimaj.image.MBFImage;
 import wrk.ItfWrkPhidget;
 import wrk.Wrk;
@@ -61,7 +66,8 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
-    public void handleFrame(MBFImage frame) {
+    public void handleFrame(WritableImage wr) {
+        refIhm.showImage(wr);
     }
 
     public void setRefIhm(ItfIhmCtrl refIhm) {
