@@ -1,6 +1,6 @@
 package ctrl;
 
-import ihm.ItfIhmCtrl;
+
 import org.openimaj.image.MBFImage;
 import wrk.ItfWrkPhidget;
 import wrk.Wrk;
