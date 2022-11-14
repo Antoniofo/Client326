@@ -12,7 +12,7 @@ public class WrkUDP extends Thread {
 
 	private boolean runing;
 	private DatagramSocket socketUDP;
-	public ItfWrkUdp refWrk;
+	public ItfWrkUDP refWrk;
 
 	public WrkUDP(){
 

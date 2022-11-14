@@ -32,7 +32,7 @@ public class XboxButton {
         return name;
     }
 
-    public XbxButton() {
+    public XboxButton() {
 
     }
 

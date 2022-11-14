@@ -9,6 +9,9 @@ public class Main {
         Ctrl ctrl = new Ctrl();
         Wrk wrk = new Wrk();
 
-
+        ctrl.setRefIhm(ihm);
+        ctrl.setRefWrk(wrk);
+        ihm.setRefCtrl(ctrl);
+        ctrl.start();
     }
 }

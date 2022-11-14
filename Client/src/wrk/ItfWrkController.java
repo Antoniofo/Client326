@@ -1,6 +1,8 @@
 package wrk;
 
 
+import beans.XboxButton;
+
 /**
  * @author eggera
  * @version 1.0
