@@ -16,6 +16,10 @@ public class IhmClientUser
     private TextField txtfRobotStatus;
     @javafx.fxml.FXML
     private TextField txtfControllerStatus;
+    @javafx.fxml.FXML
+    private CheckBox cbxMicrophone;
+    @javafx.fxml.FXML
+    private CheckBox cbxSound;
 
     @javafx.fxml.FXML
     public void initialize() {
