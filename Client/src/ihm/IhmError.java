@@ -3,6 +3,7 @@ package ihm;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ import java.io.IOException;
 
 public class IhmError
 {
+    @FXML
+    public TextArea txtMessage;
     private Stage stage;
     private final String fxml = "/ihm/Error.fxml";
     private Ihm link;
@@ -23,12 +26,10 @@ public class IhmError
         this.link = link;
     }
 
-    @javafx.fxml.FXML
-    public void initialize() {
-    }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
+    public void start(String message){
+        txtMessage.setText(message);
         IhmError myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {

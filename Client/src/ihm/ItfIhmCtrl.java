@@ -23,4 +23,10 @@ public interface ItfIhmCtrl {
 	String getUser();
 
 	void setAdmin(boolean b);
+
+    boolean connnectConttroller();
+
+	void disconnectController();
+
+	void showError(String message);
 }

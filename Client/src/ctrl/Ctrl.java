@@ -28,6 +28,9 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     public void start() {
         refIhm.startIhm();
+        if(refWrk.connectToServer("wstemfa45-06", 42068)){
+            refIhm.showError("Server NOT Connected");
+        }
     }
 
     @Override
@@ -48,6 +51,16 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     @Override
     public void tryAgain() {
 
+    }
+
+    @Override
+    public boolean connectController() {
+        return refWrk.connectController();
+    }
+
+    @Override
+    public void disconnectController() {
+        refWrk.disconnectController();
     }
 
     @Override

@@ -16,6 +16,6 @@
   </rowConstraints>
    <children>
       <Button mnemonicParsing="false" onAction="#tryAgain" prefHeight="25.0" prefWidth="236.0" text="Try again" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-      <TextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="130.0" prefWidth="236.0" text="Username or password incorrect.&#10;&#10;Please try again." GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+      <TextArea fx:id="txtMessage" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="130.0" prefWidth="236.0" text="Username or password incorrect.&#10;&#10;Please try again." GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
    </children>
 </GridPane>

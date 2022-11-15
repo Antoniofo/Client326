@@ -71,8 +71,8 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        quit();
         link.showClient(txtfLogin.getText(), txtf.getText());
+        quit();
     }
 
     public void register(ActionEvent actionEvent) {

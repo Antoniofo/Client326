@@ -114,4 +114,8 @@ public class WrkSocket extends Thread {
     public void upgradeUser(String currentUser) {
         writeMessage(String.format("upgrade,%s",currentUser));
     }
+
+    public void sendCommand(String button) {
+        writeMessage(button);
+    }
 }//end WrkSocket

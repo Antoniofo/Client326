@@ -16,4 +16,7 @@ public interface ItfCtrlIhm {
 
 	public void tryAgain();
 
+    boolean connectController();
+
+	void disconnectController();
 }

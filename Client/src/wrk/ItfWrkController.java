@@ -1,8 +1,6 @@
 package wrk;
 
 
-import beans.XboxButton;
-
 /**
  * @author eggera
  * @version 1.0
@@ -10,5 +8,5 @@ import beans.XboxButton;
  */
 public interface ItfWrkController {
 
-    public void receiveButton(XboxButton button);
+    public void receiveButton(String button);
 }

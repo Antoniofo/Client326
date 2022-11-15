@@ -1,10 +1,8 @@
 package wrk;
 
-import beans.XboxButton;
 import ctrl.ItfCtrlWrk;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import org.openimaj.image.MBFImage;
 
 import java.awt.image.BufferedImage;
 import java.net.SocketException;
@@ -48,12 +46,14 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
 
-    public void connectToServer() {
+    public boolean connectToServer(String ip, int port) {
+        boolean ok = wrkSocket.connect(ip, port);
         wrkSocket.start();
+        return ok;
     }
 
-    public void connectController() {
-        wrkController.connectController();
+    public boolean connectController() {
+        return wrkController.connectController();
     }
 
     @Override
@@ -89,8 +89,8 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
     @Override
-    public void receiveButton(XboxButton button) {
-
+    public void receiveButton(String button) {
+        wrkSocket.sendCommand(button);
     }
 
     @Override
@@ -112,5 +112,9 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void checkLogin(String username, String password) {
         wrkSocket.sendLoginCheck(username, password);
+    }
+
+    public void disconnectController() {
+        wrkController.disconnectController();
     }
 }//end Wrk

@@ -2,11 +2,7 @@ package ihm;
 
 import ctrl.ItfCtrlIhm;
 import javafx.application.Platform;
-import javafx.fxml.Initializable;
 import javafx.scene.image.WritableImage;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author raposoesilvac
@@ -72,13 +68,23 @@ public class Ihm implements ItfIhmCtrl {
 	}
 
 	@Override
+	public boolean connnectConttroller() {
+		return refCtrl.connectController();
+	}
+
+	@Override
+	public void disconnectController() {
+		refCtrl.disconnectController();
+	}
+
+	@Override
 	public String getUser() {
 		return user;
 	}
 
 	@Override
 	public void showClient(String username, String password) {
-		refCtrl.logIn(username, password);
+		//refCtrl.logIn(username, password);
 
 		if(isAdmin){
 
@@ -99,7 +105,8 @@ public class Ihm implements ItfIhmCtrl {
 		ihmRegister.start();
 	}
 
-	public void showError(){
-		ihmError.start();
+	@Override
+	public void showError(String message){
+		ihmError.start(message);
 	}
 }//end Ihm

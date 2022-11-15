@@ -50,19 +50,28 @@ public class IhmClientAdmin implements Initializable
 
     public void logOut(ActionEvent actionEvent) {
         stage.close();
+        //TODO SERVER STUFF
     }
 
     public void disconnectController(ActionEvent actionEvent) {
+        link.disconnectController();
+        txtfControllerStatus.setText("Controller Disconnected");
     }
 
     public void disconnectRobot(ActionEvent actionEvent) {
     }
 
     public void connectController(ActionEvent actionEvent) {
+        if(link.connnectConttroller()){
+            txtfControllerStatus.setText("Controller Connection Successfull");
+        }else{
+            txtfControllerStatus.setText("Controller Connection Failed");
+        }
     }
 
     public void connectRobot(ActionEvent actionEvent) {
     }
+
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void start(){
         IhmClientAdmin myself = this;
@@ -99,10 +108,10 @@ public class IhmClientAdmin implements Initializable
 
     public void showImage(WritableImage wr) {
         if(wr != null && screenRobot != null){
+            screenRobot.setVisible(true);
             screenRobot.setImage(wr);
         }else{
-            IhmError err = new IhmError();
-            err.start();
+            link.showError("Can't show Image");
         }
     }
 }

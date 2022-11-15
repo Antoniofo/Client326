@@ -51,12 +51,20 @@ public class IhmClientUser
     }
 
     public void disconnectController(ActionEvent actionEvent) {
+        link.disconnectController();
+        txtfControllerStatus.setText("Controller Disconnected");
     }
 
     public void disconnectRobot(ActionEvent actionEvent) {
     }
 
     public void connectController(ActionEvent actionEvent) {
+        if(link.connnectConttroller()){
+            txtfControllerStatus.setText("Controller Connection Successful");
+
+        }else{
+            txtfControllerStatus.setText("Controller Connection Failed");
+        }
     }
 
     public void connectRobot(ActionEvent actionEvent) {
@@ -70,10 +78,8 @@ public class IhmClientUser
             return myself;
         };
 
-        // Commence l'initialisation dans le thread de java
         SwingUtilities.invokeLater(() -> {
-            new JFXPanel(); // Permet d'initializer le toolkit et l'environment JavaFX
-            // Accède au dispatcher thread tant aimé par JavaFX
+            new JFXPanel();
             Platform.runLater(() -> {
                 try {
                     stage = new Stage();
@@ -99,10 +105,10 @@ public class IhmClientUser
 
     public void showImage(WritableImage wr) {
         if(wr != null && screenRobot != null){
+            screenRobot.setVisible(true);
             screenRobot.setImage(wr);
         }else{
-            IhmError err = new IhmError();
-            err.start();
+            link.showError("Can't show image");
         }
     }
 }
