@@ -118,4 +118,17 @@ public class WrkSocket extends Thread {
     public void sendCommand(String button) {
         writeMessage(button);
     }
+
+    public void logOut() {
+        writeMessage("logout");
+    }
+
+    public boolean sendRobotInit() {
+        writeMessage("ROBOTINIT");
+        return true;
+    }
+
+    public void sendRobotDisconnect() {
+        writeMessage("ROBOTSHUT");
+    }
 }//end WrkSocket

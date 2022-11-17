@@ -3,6 +3,9 @@ package wrk;
 import ctrl.ItfCtrlWrk;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import sun.audio.AudioData;
+import sun.audio.AudioDataStream;
+import sun.audio.AudioPlayer;
 
 import java.awt.image.BufferedImage;
 import java.net.SocketException;
@@ -29,12 +32,10 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
             wrkSocket = new WrkSocket();
             wrkUDP = new WrkUDP();
             wrkUDP.setRefWrk(this);
-            wrkUDP.start();
+            wrkUDP.launchThread();
         } catch (SocketException e) {
 
         }
-
-
     }
 
     /**
@@ -72,7 +73,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     @Override
     public void handleOrder(String message) {
         String[] t = message.split(",");
-        switch (message) {
+        switch (t[0]) {
             case "SuccessAdded":
                 break;
             case "SuccessLogin":
@@ -81,9 +82,9 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
                 }
                 break;
             case "Temperature":
-                if (t[1] == "1") {
+
                     refCtrl.handleTemperature(Double.valueOf(t[1]));
-                }
+
                 break;
         }
     }
@@ -106,6 +107,13 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
         refCtrl.handleFrame(wr);
     }
 
+    @Override
+    public void receiveAudio(byte[] data) {
+        AudioData ad = new AudioData(data);
+        AudioDataStream ads = new AudioDataStream(ad);
+        AudioPlayer.player.start(ads);
+    }
+
     public void setRefCtrl(ItfCtrlWrk refCtrl) {
         this.refCtrl = refCtrl;
     }
@@ -116,5 +124,17 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void disconnectController() {
         wrkController.disconnectController();
+    }
+
+    public void logOut() {
+        wrkSocket.logOut();
+    }
+
+    public boolean connectRobot() {
+        return wrkSocket.sendRobotInit();
+    }
+
+    public void disconnectRobot() {
+        wrkSocket.sendRobotDisconnect();
     }
 }//end Wrk

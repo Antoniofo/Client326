@@ -46,6 +46,7 @@ public class IhmClientUser
     }
 
     public void logOut(ActionEvent actionEvent) {
+        link.logOut();
         stage.close();
         link.showLogin();
     }
@@ -68,6 +69,12 @@ public class IhmClientUser
     }
 
     public void connectRobot(ActionEvent actionEvent) {
+        if(link.connnectRobot()){
+            txtfRobotStatus.setText("Robot Connection Successful");
+
+        }else{
+            txtfRobotStatus.setText("Robot Connection Failed");
+        }
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
@@ -110,5 +117,9 @@ public class IhmClientUser
         }else{
             link.showError("Can't show image");
         }
+    }
+
+    public void updateHumidity(double humidity) {
+        txtHumidity.setText(humidity + "%");
     }
 }

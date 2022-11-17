@@ -35,9 +35,9 @@ public class IhmClientAdmin implements Initializable
     @javafx.fxml.FXML
     private TextField txtfControllerStatus;
     @javafx.fxml.FXML
-    private CheckBox ckbMicro;
+    private CheckBox cbxMicrophone;
     @javafx.fxml.FXML
-    private CheckBox ckbSound;
+    private CheckBox cbxSound;
     private Ihm link;
     public void setLink(Ihm link) {
         this.link = link;
@@ -59,6 +59,8 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void disconnectRobot(ActionEvent actionEvent) {
+        link.disconnectRobot();
+        txtfRobotStatus.setText("Robot Disconnected");
     }
 
     public void connectController(ActionEvent actionEvent) {
@@ -70,6 +72,12 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void connectRobot(ActionEvent actionEvent) {
+        if(link.connnectRobot()){
+            txtfRobotStatus.setText("Robot Connection Successful");
+
+        }else{
+            txtfRobotStatus.setText("Robot Connection Failed");
+        }
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
@@ -113,5 +121,8 @@ public class IhmClientAdmin implements Initializable
         }else{
             link.showError("Can't show Image");
         }
+    }
+
+    public void updateHumidity(double humidity) {
     }
 }

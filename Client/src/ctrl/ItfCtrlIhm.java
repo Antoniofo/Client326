@@ -19,4 +19,8 @@ public interface ItfCtrlIhm {
     boolean connectController();
 
 	void disconnectController();
+
+	boolean connectRobot();
+
+	void disconnectRobot();
 }

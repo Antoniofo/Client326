@@ -12,4 +12,6 @@ import java.awt.image.BufferedImage;
  */
 public interface ItfWrkUDP {
     public void receiveFrame(BufferedImage frame);
+
+    void receiveAudio(byte[] data);
 }

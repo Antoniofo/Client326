@@ -29,7 +29,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     public void start() {
         refIhm.startIhm();
         if(refWrk.connectToServer("wstemfa45-06", 42068)){
-            refIhm.showError("Server NOT Connected");
+            refIhm.showError("Server Not Connected");
         }
     }
 
@@ -40,7 +40,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public void logOut() {
-
+        refWrk.logOut();
     }
 
     @Override
@@ -64,12 +64,22 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
+    public boolean connectRobot() {
+        return refWrk.connectRobot();
+    }
+
+    @Override
+    public void disconnectRobot() {
+        refWrk.disconnectRobot();
+    }
+
+    @Override
     public void handleTemperature(double temperature) {
     }
 
     @Override
     public void handleHumidity(double humdity) {
-
+        refIhm.showHumidity(humdity);
     }
 
     @Override

@@ -109,4 +109,26 @@ public class Ihm implements ItfIhmCtrl {
 	public void showError(String message){
 		ihmError.start(message);
 	}
+
+	@Override
+	public void showHumidity(double humidity) {
+		if(isAdmin){
+			ihmClientAdmin.updateHumidity(humidity);
+		}else {
+			ihmClientUser.updateHumidity(humidity);
+		}
+	}
+
+	public void logOut() {
+		user = null;
+		refCtrl.logOut();
+	}
+
+	public boolean connnectRobot() {
+		return refCtrl.connectRobot();
+	}
+
+	public void disconnectRobot() {
+		refCtrl.disconnectRobot();
+	}
 }//end Ihm

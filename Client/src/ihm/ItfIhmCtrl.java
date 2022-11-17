@@ -29,4 +29,6 @@ public interface ItfIhmCtrl {
 	void disconnectController();
 
 	void showError(String message);
+
+    void showHumidity(double humidity);
 }
