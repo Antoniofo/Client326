@@ -85,9 +85,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
                 refCtrl.showLogin();
                 break;
             case "Temperature":
-
                     refCtrl.handleTemperature(Double.valueOf(t[1]));
-
                 break;
         }
     }
@@ -133,8 +131,8 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
         wrkSocket.logOut();
     }
 
-    public boolean connectRobot() {
-        return wrkSocket.sendRobotInit();
+    public void connectRobot() {
+        wrkSocket.sendRobotInit();
     }
 
     public void disconnectRobot() {

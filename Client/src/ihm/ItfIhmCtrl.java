@@ -33,4 +33,6 @@ public interface ItfIhmCtrl {
     void showHumidity(double humidity);
 
 	void showClient(boolean b);
+
+	void showTemperature(double temperature);
 }

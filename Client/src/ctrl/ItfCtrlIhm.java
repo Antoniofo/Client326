@@ -20,7 +20,7 @@ public interface ItfCtrlIhm {
 
 	void disconnectController();
 
-	boolean connectRobot();
+	void connectRobot();
 
 	void disconnectRobot();
 }

@@ -73,12 +73,7 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void connectRobot(ActionEvent actionEvent) {
-        if(link.connnectRobot()){
-            txtfRobotStatus.setText("Robot Connection Successful");
-
-        }else{
-            txtfRobotStatus.setText("Robot Connection Failed");
-        }
+        link.connnectRobot();
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
@@ -108,6 +103,7 @@ public class IhmClientAdmin implements Initializable
                     stage.setTitle("Client Admin");
                     stage.show();
                     stage.setOnCloseRequest((e)-> {
+                        link.logOut();
                         e.consume();
                         System.exit(0);
                     });
@@ -130,5 +126,9 @@ public class IhmClientAdmin implements Initializable
 
     public void updateHumidity(double humidity) {
         txtHumidity.setText(humidity + "%");
+    }
+
+    public void showTemperature(double temperature) {
+        txtTemperature.setText(temperature+"°C");
     }
 }

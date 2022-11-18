@@ -65,8 +65,8 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
-    public boolean connectRobot() {
-        return refWrk.connectRobot();
+    public void connectRobot() {
+         refWrk.connectRobot();
     }
 
     @Override
@@ -76,6 +76,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public void handleTemperature(double temperature) {
+        refIhm.showTemperature(temperature);
     }
 
     @Override

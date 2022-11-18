@@ -121,13 +121,22 @@ public class Ihm implements ItfIhmCtrl {
         }
     }
 
+    @Override
+    public void showTemperature(double temperature) {
+        if(isAdmin){
+            ihmClientAdmin.showTemperature(temperature);
+        }else{
+            ihmClientUser.showTemperature(temperature);
+        }
+    }
+
     public void logOut() {
         user = null;
         refCtrl.logOut();
     }
 
-    public boolean connnectRobot() {
-        return refCtrl.connectRobot();
+    public void connnectRobot() {
+        refCtrl.connectRobot();
     }
 
     public void disconnectRobot() {

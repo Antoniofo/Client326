@@ -123,9 +123,8 @@ public class WrkSocket extends Thread {
         writeMessage("logout");
     }
 
-    public boolean sendRobotInit() {
+    public void sendRobotInit() {
         writeMessage("ROBOTINIT");
-        return true;
     }
 
     public void sendRobotDisconnect() {

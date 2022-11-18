@@ -72,12 +72,7 @@ public class IhmClientUser
     }
 
     public void connectRobot(ActionEvent actionEvent) {
-        if(link.connnectRobot()){
-            txtfRobotStatus.setText("Robot Connection Successful");
-
-        }else{
-            txtfRobotStatus.setText("Robot Connection Failed");
-        }
+        link.connnectRobot();
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
@@ -105,6 +100,7 @@ public class IhmClientUser
                     stage.setTitle("Client User");
                     stage.show();
                     stage.setOnCloseRequest((e)-> {
+                        link.logOut();
                         e.consume();
                         System.exit(0);
                     });
@@ -127,5 +123,9 @@ public class IhmClientUser
 
     public void updateHumidity(double humidity) {
         txtHumidity.setText(humidity + "%");
+    }
+
+    public void showTemperature(double temperature) {
+        txtTemperature.setText(temperature+"°C");
     }
 }
