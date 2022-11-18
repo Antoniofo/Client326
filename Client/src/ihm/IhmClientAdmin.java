@@ -49,8 +49,9 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void logOut(ActionEvent actionEvent) {
+        link.logOut();
+        link.showLogin();
         stage.close();
-        //TODO SERVER STUFF
     }
 
     public void disconnectController(ActionEvent actionEvent) {
@@ -106,6 +107,10 @@ public class IhmClientAdmin implements Initializable
                     stage.setScene(scene);
                     stage.setTitle("Client Admin");
                     stage.show();
+                    stage.setOnCloseRequest((e)-> {
+                        e.consume();
+                        System.exit(0);
+                    });
                 } catch (IOException ex) {
                     System.out.println("Can't start the IHM because : " + ex);
                     Platform.exit();
@@ -124,5 +129,6 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void updateHumidity(double humidity) {
+        txtHumidity.setText(humidity + "%");
     }
 }

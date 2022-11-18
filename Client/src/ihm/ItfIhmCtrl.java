@@ -16,7 +16,7 @@ public interface ItfIhmCtrl {
 
 	public void showImage(WritableImage wr);
 
-	void showClient(String username, String password);
+	void logIn(String username, String password);
 
 	void showLogin();
 
@@ -31,4 +31,6 @@ public interface ItfIhmCtrl {
 	void showError(String message);
 
     void showHumidity(double humidity);
+
+	void showClient(boolean b);
 }

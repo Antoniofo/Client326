@@ -19,4 +19,8 @@ public interface ItfCtrlWrk {
     String getCurrentUser();
 
     void upgradeUser();
+
+    void showClient(boolean b);
+
+    void showLogin();
 }

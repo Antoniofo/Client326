@@ -29,7 +29,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
         try {
             wrkController = new WrkController();
             wrkPhidget = new WrkPhidget();
-            wrkSocket = new WrkSocket();
+            wrkSocket = new WrkSocket(this);
             wrkUDP = new WrkUDP();
             wrkUDP.setRefWrk(this);
             wrkUDP.launchThread();
@@ -74,12 +74,15 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     public void handleOrder(String message) {
         String[] t = message.split(",");
         switch (t[0]) {
-            case "SuccessAdded":
+            case "LOGINUSER":
+                refCtrl.showClient(false);
                 break;
-            case "SuccessLogin":
-                if (t[1] == "1") {
-                    refCtrl.upgradeUser();
-                }
+            case "LOGINADMIN":
+                refCtrl.upgradeUser();
+                refCtrl.showClient(true);
+                break;
+            case "NOLOGIN":
+                refCtrl.showLogin();
                 break;
             case "Temperature":
 
@@ -136,5 +139,9 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void disconnectRobot() {
         wrkSocket.sendRobotDisconnect();
+    }
+
+    public void register(String text, String txtfPasswordText) {
+        wrkSocket.sendUserRegistration(text, txtfPasswordText, false);
     }
 }//end Wrk

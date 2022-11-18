@@ -12,7 +12,7 @@ public interface ItfCtrlIhm {
 
 	public void logOut();
 
-	public void register();
+	public void register(String text, String txtfPasswordText);
 
 	public void tryAgain();
 

@@ -16,8 +16,8 @@ public class WrkSocket extends Thread {
     private Socket socket;
     public ItfSocketWrk refWrk;
 
-    public WrkSocket() {
-
+    public WrkSocket(ItfSocketWrk refWrk) {
+        this.refWrk = refWrk;
     }
 
     /**
@@ -76,10 +76,10 @@ public class WrkSocket extends Thread {
             SocketAddress socketAddress  = new InetSocketAddress(InetAddress.getByName(IP), port);
 
             socket = new Socket();
-            socket.connect(socketAddress, 1000);
+            socket.connect(socketAddress, 0);
             out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
+            writeMessage("Connected");
             return true;
         } catch (Exception e) {
 

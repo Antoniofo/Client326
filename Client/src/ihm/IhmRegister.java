@@ -71,5 +71,10 @@ public class IhmRegister
         stage.close();
     }
     public void registerAccount(ActionEvent actionEvent) {
+        if(txtfConfirmPassword.getText().equals(txtfPassword.getText())){
+            link.register(txtfUsername.getText(),txtfPassword.getText());
+            quit();
+        }
+
     }
 }

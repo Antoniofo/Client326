@@ -29,7 +29,7 @@ public class IhmError
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void start(String message){
-        txtMessage.setText(message);
+
         IhmError myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -54,6 +54,7 @@ public class IhmError
                     stage.setScene(scene);
                     stage.setTitle("Error");
                     stage.show();
+                    txtMessage.setText(message);
                 } catch (IOException ex) {
                     System.out.println("Can't start the IHM because : " + ex);
                     Platform.exit();

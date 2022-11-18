@@ -47,8 +47,9 @@ public class IhmClientUser
 
     public void logOut(ActionEvent actionEvent) {
         link.logOut();
-        stage.close();
         link.showLogin();
+        stage.close();
+
     }
 
     public void disconnectController(ActionEvent actionEvent) {
@@ -57,6 +58,8 @@ public class IhmClientUser
     }
 
     public void disconnectRobot(ActionEvent actionEvent) {
+        link.disconnectRobot();
+        txtfRobotStatus.setText("Robot Disconnected");
     }
 
     public void connectController(ActionEvent actionEvent) {
@@ -101,7 +104,10 @@ public class IhmClientUser
                     stage.setScene(scene);
                     stage.setTitle("Client User");
                     stage.show();
-
+                    stage.setOnCloseRequest((e)-> {
+                        e.consume();
+                        System.exit(0);
+                    });
                 } catch (IOException ex) {
                     System.out.println("Can't start the IHM because : " + ex);
                     Platform.exit();

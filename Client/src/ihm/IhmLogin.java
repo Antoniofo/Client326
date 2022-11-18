@@ -62,6 +62,10 @@ public class IhmLogin implements Initializable {
                     stage.setScene(scene);
                     stage.setTitle("Login");
                     stage.show();
+                    stage.setOnCloseRequest((e)-> {
+                        e.consume();
+                        System.exit(0);
+                    });
                 } catch (IOException ex) {
                     System.out.println("Can't start the IHM because : " + ex);
                     Platform.exit();
@@ -71,12 +75,18 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        link.showClient(txtfLogin.getText(), txtf.getText());
-        quit();
+        String username = txtfLogin.getText();
+        String pwd = txtf.getText();
+        if(username != null && pwd != null){
+            if(!(username.equals("") || pwd.equals(""))){
+                link.logIn(username, pwd);
+                quit();
+            }
+        }
+
     }
 
     public void register(ActionEvent actionEvent) {
-        quit();
         link.showRegister();
     }
 

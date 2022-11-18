@@ -28,7 +28,8 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     public void start() {
         refIhm.startIhm();
-        if(refWrk.connectToServer("wstemfa45-06", 42068)){
+        boolean k = refWrk.connectToServer("wstemfa45-05", 7777);
+        if(!k){
             refIhm.showError("Server Not Connected");
         }
     }
@@ -44,8 +45,8 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
-    public void register() {
-
+    public void register(String text, String txtfPasswordText) {
+    refWrk.register(text,txtfPasswordText);
     }
 
     @Override
@@ -95,6 +96,16 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     @Override
     public void upgradeUser() {
         refIhm.setAdmin(true);
+    }
+
+    @Override
+    public void showClient(boolean b) {
+        refIhm.showClient(b);
+    }
+
+    @Override
+    public void showLogin() {
+        refIhm.showLogin();
     }
 
     public void setRefIhm(ItfIhmCtrl refIhm) {

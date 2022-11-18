@@ -11,30 +11,30 @@ import javafx.scene.image.WritableImage;
  */
 public class Ihm implements ItfIhmCtrl {
 
-	private String user;
-	private boolean isAdmin;
-	public IhmClientAdmin ihmClientAdmin;
-	public IhmClientUser ihmClientUser;
-	public IhmError ihmError;
-	public IhmLogin ihmLogin;
-	public IhmRegister ihmRegister;
-	public ItfCtrlIhm refCtrl;	
+    private String user;
+    private boolean isAdmin;
+    public IhmClientAdmin ihmClientAdmin;
+    public IhmClientUser ihmClientUser;
+    public IhmError ihmError;
+    public IhmLogin ihmLogin;
+    public IhmRegister ihmRegister;
+    public ItfCtrlIhm refCtrl;
 
-	public Ihm(){
-		isAdmin = false;
-		ihmLogin = new IhmLogin();
-		ihmClientAdmin = new IhmClientAdmin();
-		ihmError = new IhmError();
-		ihmClientUser = new IhmClientUser();
-		ihmRegister = new IhmRegister();
+    public Ihm() {
+        isAdmin = false;
+        ihmLogin = new IhmLogin();
+        ihmClientAdmin = new IhmClientAdmin();
+        ihmError = new IhmError();
+        ihmClientUser = new IhmClientUser();
+        ihmRegister = new IhmRegister();
 
-		ihmClientAdmin.setLink(this);
-		ihmLogin.setLink(this);
-		ihmError.setLink(this);
-		ihmRegister.setLink(this);
-		ihmClientUser.setLink(this);
+        ihmClientAdmin.setLink(this);
+        ihmLogin.setLink(this);
+        ihmError.setLink(this);
+        ihmRegister.setLink(this);
+        ihmClientUser.setLink(this);
 
-	}
+    }
 
     public void setRefCtrl(ItfCtrlIhm refCtrl) {
         this.refCtrl = refCtrl;
@@ -42,93 +42,99 @@ public class Ihm implements ItfIhmCtrl {
 
     public void finalize() throws Throwable {
 
-	}
-	public void quit(){
-		Platform.exit();
-	}
+    }
 
-	public void startIhm(){
-		ihmLogin.start();
-	}
+    public void quit() {
+        Platform.exit();
+    }
 
-	@Override
-	public void showImage(WritableImage wr) {
-		if(wr != null){
-			if(isAdmin){
-				ihmClientAdmin.showImage(wr);
-			}else{
-				ihmClientUser.showImage(wr);
-			}
-		}
-	}
+    public void startIhm() {
+        ihmLogin.start();
+    }
 
-	@Override
-	public void setAdmin(boolean admin) {
-		isAdmin = admin;
-	}
+    @Override
+    public void showImage(WritableImage wr) {
+        if (wr != null) {
+            if (isAdmin) {
+                ihmClientAdmin.showImage(wr);
+            } else {
+                ihmClientUser.showImage(wr);
+            }
+        }
+    }
 
-	@Override
-	public boolean connnectConttroller() {
-		return refCtrl.connectController();
-	}
+    @Override
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
-	@Override
-	public void disconnectController() {
-		refCtrl.disconnectController();
-	}
+    @Override
+    public boolean connnectConttroller() {
+        return refCtrl.connectController();
+    }
 
-	@Override
-	public String getUser() {
-		return user;
-	}
+    @Override
+    public void disconnectController() {
+        refCtrl.disconnectController();
+    }
 
-	@Override
-	public void showClient(String username, String password) {
-		//refCtrl.logIn(username, password);
+    @Override
+    public String getUser() {
+        return user;
+    }
 
-		if(isAdmin){
-
-			ihmClientAdmin.start();
-		}else{
-			ihmClientUser.start();
-		}
-		user = username;
-	}
+    @Override
+    public void logIn(String username, String password) {
+        refCtrl.logIn(username, password);
+    }
 
 
-	@Override
-	public void showLogin() {
-		ihmLogin.start();
-	}
+    @Override
+    public void showLogin() {
+        ihmLogin.start();
+    }
 
-	public void showRegister(){
-		ihmRegister.start();
-	}
+    public void showRegister() {
+        ihmRegister.start();
+    }
 
-	@Override
-	public void showError(String message){
-		ihmError.start(message);
-	}
+    @Override
+    public void showError(String message) {
+        ihmError.start(message);
+    }
 
-	@Override
-	public void showHumidity(double humidity) {
-		if(isAdmin){
-			ihmClientAdmin.updateHumidity(humidity);
-		}else {
-			ihmClientUser.updateHumidity(humidity);
-		}
-	}
+    @Override
+    public void showHumidity(double humidity) {
+        if (isAdmin) {
+            ihmClientAdmin.updateHumidity(humidity);
+        } else {
+            ihmClientUser.updateHumidity(humidity);
+        }
+    }
 
-	public void logOut() {
-		user = null;
-		refCtrl.logOut();
-	}
+    @Override
+    public void showClient(boolean b) {
+        if (b) {
+            ihmClientAdmin.start();
+        } else {
+            ihmClientUser.start();
+        }
+    }
 
-	public boolean connnectRobot() {
-		return refCtrl.connectRobot();
-	}
+    public void logOut() {
+        user = null;
+        refCtrl.logOut();
+    }
 
-	public void disconnectRobot() {
-		refCtrl.disconnectRobot();
-	}
+    public boolean connnectRobot() {
+        return refCtrl.connectRobot();
+    }
+
+    public void disconnectRobot() {
+        refCtrl.disconnectRobot();
+    }
+
+    public void register(String text, String txtfPasswordText) {
+        refCtrl.register(text, txtfPasswordText);
+    }
 }//end Ihm
