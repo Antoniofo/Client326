@@ -20,12 +20,12 @@ public class WrkUDP {
 	private boolean runningAudio;
 	private Thread threadAudio;
 	private Thread threadImg;
-	private byte[] bufImg = new byte[42069];
+	private byte[] bufImg = new byte[65565];
 	private DatagramSocket socketUDPVideo;
 
 	private DatagramSocket socketUDPAudio;
 
-	private byte[] bufAudio = new byte[42069];
+	private byte[] bufAudio = new byte[65565];
 	public ItfWrkUDP refWrk;
 
 	public void setRefWrk(ItfWrkUDP refWrk) {
@@ -82,5 +82,10 @@ public class WrkUDP {
 		};
 		threadImg.start();
 		threadAudio.start();
+	}
+
+	public void stopThread() throws InterruptedException {
+		threadImg.join();
+		threadAudio.join();
 	}
 }//end WrkUDP

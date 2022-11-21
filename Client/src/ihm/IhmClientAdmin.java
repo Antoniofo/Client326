@@ -76,8 +76,7 @@ public class IhmClientAdmin implements Initializable
         link.connnectRobot();
     }
 
-    @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
+    public void init(){
         IhmClientAdmin myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -101,9 +100,9 @@ public class IhmClientAdmin implements Initializable
                     stage.setResizable(false);
                     stage.setScene(scene);
                     stage.setTitle("Client Admin");
-                    stage.show();
+
                     stage.setOnCloseRequest((e)-> {
-                        link.logOut();
+                        link.killThread();
                         e.consume();
                         System.exit(0);
                     });
@@ -115,6 +114,14 @@ public class IhmClientAdmin implements Initializable
         });
     }
 
+    @SuppressWarnings("ResultOfObjectAllocationIgnored")
+    public void start(){
+        Platform.runLater(()->{
+            stage.show();
+        });
+
+    }
+
     public void showImage(WritableImage wr) {
         if(wr != null && screenRobot != null){
             screenRobot.setVisible(true);
@@ -122,6 +129,10 @@ public class IhmClientAdmin implements Initializable
         }else{
             link.showError("Can't show Image");
         }
+    }
+
+    public void quit(){
+        stage.close();
     }
 
     public void updateHumidity(double humidity) {

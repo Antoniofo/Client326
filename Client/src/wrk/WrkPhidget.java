@@ -13,9 +13,11 @@ public class WrkPhidget {
 	private ItfWrkPhidget refWrk;
 	private final static int VINT_RFID_SERIAL = 604449;
 	private final static int VINT_HUB_SERIAL = 636313;
-	private final static int MS_TIMEOUT = 5000;
+	//private final static int MS_TIMEOUT = 5000;
 
-	public WrkPhidget(){
+	public WrkPhidget(ItfWrkPhidget refWrk){
+		this.refWrk = refWrk;
+
 		try {
 			RFID rfid = new RFID();
 			HumiditySensor hum = new HumiditySensor();
@@ -33,12 +35,18 @@ public class WrkPhidget {
 			hum.addHumidityChangeListener(new HumiditySensorHumidityChangeListener() {
 				@Override
 				public void onHumidityChange(HumiditySensorHumidityChangeEvent humidity) {
-					refWrk.receiveHumidity(humidity.getHumidity());
+					try {
+						Thread.sleep(10000);
+						refWrk.receiveHumidity(humidity.getHumidity());
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+
 				}
 			});
 
-			rfid.open(MS_TIMEOUT);
-			hum.open(MS_TIMEOUT);
+			rfid.open();
+			hum.open();
 		} catch (PhidgetException e) {
 		}
 	}

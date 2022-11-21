@@ -12,17 +12,17 @@ public class WrkSocket extends Thread {
 
     private BufferedReader in;
     private BufferedWriter out;
-    private boolean runing;
-    private Socket socket;
+    private volatile boolean runing;
+    private volatile Socket socket;
     public ItfSocketWrk refWrk;
 
     public WrkSocket(ItfSocketWrk refWrk) {
         this.refWrk = refWrk;
+
     }
 
     /**
-     *
-     * @exception Throwable
+     * @throws Throwable
      */
     public void finalize()
             throws Throwable {
@@ -42,11 +42,12 @@ public class WrkSocket extends Thread {
     @Override
     public void run() {
         runing = true;
-        while(runing){
-            if(socket != null && in != null){
-                if(socket.isConnected()){
+        while (runing) {
+            if (socket != null && in != null) {
+                if (socket.isConnected()) {
                     String message = readMessages();
-                    if(message != null){
+                    if (message != null) {
+                        System.out.println(message);
                         refWrk.handleOrder(message);
                     }
                 }
@@ -62,7 +63,7 @@ public class WrkSocket extends Thread {
     private void writeMessage(String message) {
         if (out != null && message != null) {
             try {
-                out.write(message +"\n");
+                out.write(message + "\n");
                 out.flush();
             } catch (IOException ex) {
             }
@@ -70,11 +71,9 @@ public class WrkSocket extends Thread {
     }
 
 
-
     public boolean connect(String IP, int port) {
-        try{
-            SocketAddress socketAddress  = new InetSocketAddress(InetAddress.getByName(IP), port);
-
+        try {
+            SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(IP), port);
             socket = new Socket();
             socket.connect(socketAddress, 0);
             out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -82,27 +81,27 @@ public class WrkSocket extends Thread {
             writeMessage("Connected");
             return true;
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
         return false;
     }
-    
-    public void sendUserRegistration(String username, String password, boolean isAdmin){
-        writeMessage(String.format("register,%s,%s,%s",username,password,isAdmin));
+
+    public void sendUserRegistration(String username, String password, boolean isAdmin) {
+        writeMessage(String.format("register,%s,%s,%s", username, password, isAdmin));
     }
-    
-    public void sendLoginCheck(String username, String password){
-        writeMessage(String.format("checklogin,%s,%s",username,password));
+
+    public void sendLoginCheck(String username, String password) {
+        writeMessage(String.format("checklogin,%s,%s", username, password));
     }
-    
-    public void sendHumidity(double hum){
-        writeMessage(String.format("humidity,%s",hum));
+
+    public void sendHumidity(double hum) {
+        writeMessage(String.format("humidity,%s", hum));
     }
-            
+
 
     public void disconnect() {
-        if(socket != null){
-            try{
+        if (socket != null) {
+            try {
                 socket.close();
                 socket = null;
             } catch (IOException e) {
@@ -112,11 +111,11 @@ public class WrkSocket extends Thread {
     }
 
     public void upgradeUser(String currentUser) {
-        writeMessage(String.format("upgrade,%s",currentUser));
+        writeMessage(String.format("upgrade,%s", currentUser));
     }
 
     public void sendCommand(String button) {
-        writeMessage(button);
+        writeMessage("CTRL,"+button);
     }
 
     public void logOut() {

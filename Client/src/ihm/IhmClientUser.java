@@ -17,8 +17,7 @@ import javafx.util.Callback;
 import javax.swing.*;
 import java.io.IOException;
 
-public class IhmClientUser
-{
+public class IhmClientUser {
     private Stage stage;
     private final String fxml = "/ihm/ClientUser.fxml";
     @javafx.fxml.FXML
@@ -63,10 +62,10 @@ public class IhmClientUser
     }
 
     public void connectController(ActionEvent actionEvent) {
-        if(link.connnectConttroller()){
+        if (link.connnectConttroller()) {
             txtfControllerStatus.setText("Controller Connection Successful");
 
-        }else{
+        } else {
             txtfControllerStatus.setText("Controller Connection Failed");
         }
     }
@@ -75,8 +74,7 @@ public class IhmClientUser
         link.connnectRobot();
     }
 
-    @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
+    public void init() {
         IhmClientUser myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -98,9 +96,8 @@ public class IhmClientUser
                     stage.setResizable(false);
                     stage.setScene(scene);
                     stage.setTitle("Client User");
-                    stage.show();
-                    stage.setOnCloseRequest((e)-> {
-                        link.logOut();
+                    stage.setOnCloseRequest((e) -> {
+                        link.killThread();
                         e.consume();
                         System.exit(0);
                     });
@@ -112,11 +109,23 @@ public class IhmClientUser
         });
     }
 
+    @SuppressWarnings("ResultOfObjectAllocationIgnored")
+    public void start() {
+        Platform.runLater(() -> {
+            stage.show();
+        });
+
+    }
+
+    public void quit() {
+        stage.close();
+    }
+
     public void showImage(WritableImage wr) {
-        if(wr != null && screenRobot != null){
+        if (wr != null && screenRobot != null) {
             screenRobot.setVisible(true);
             screenRobot.setImage(wr);
-        }else{
+        } else {
             link.showError("Can't show image");
         }
     }
@@ -126,6 +135,6 @@ public class IhmClientUser
     }
 
     public void showTemperature(double temperature) {
-        txtTemperature.setText(temperature+"°C");
+        txtTemperature.setText(temperature + "°C");
     }
 }

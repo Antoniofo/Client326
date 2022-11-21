@@ -63,6 +63,7 @@ public class IhmLogin implements Initializable {
                     stage.setTitle("Login");
                     stage.show();
                     stage.setOnCloseRequest((e)-> {
+                        link.killThread();
                         e.consume();
                         System.exit(0);
                     });

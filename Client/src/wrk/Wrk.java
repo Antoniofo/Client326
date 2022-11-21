@@ -1,6 +1,7 @@
 package wrk;
 
 import ctrl.ItfCtrlWrk;
+import javafx.application.Platform;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import sun.audio.AudioData;
@@ -27,12 +28,15 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public Wrk() {
         try {
-            wrkController = new WrkController();
-            wrkPhidget = new WrkPhidget();
             wrkSocket = new WrkSocket(this);
+            wrkSocket.start();
             wrkUDP = new WrkUDP();
             wrkUDP.setRefWrk(this);
             wrkUDP.launchThread();
+
+            wrkPhidget = new WrkPhidget(this);
+            wrkController = new WrkController(this);
+
         } catch (SocketException e) {
 
         }
@@ -49,7 +53,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public boolean connectToServer(String ip, int port) {
         boolean ok = wrkSocket.connect(ip, port);
-        wrkSocket.start();
         return ok;
     }
 
@@ -65,21 +68,27 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     @Override
     public void receiveRFID(String tag) {
-        if (tag.equals("")) {
-            wrkSocket.upgradeUser(refCtrl.getCurrentUser());
+        System.out.println("TAG RECEIVED: "+tag);
+        if (tag.equals("5f00d10d9a")) {
+            String u = refCtrl.getCurrentUser();
+            if(u != null){
+                wrkSocket.upgradeUser(u);
+            }
         }
     }
 
     @Override
     public void handleOrder(String message) {
         String[] t = message.split(",");
+        System.out.println(t);
         switch (t[0]) {
             case "LOGINUSER":
                 refCtrl.showClient(false);
+                refCtrl.setCurrentUser(t[1]);
                 break;
             case "LOGINADMIN":
-                refCtrl.upgradeUser();
                 refCtrl.showClient(true);
+                refCtrl.setCurrentUser(t[1]);
                 break;
             case "NOLOGIN":
                 refCtrl.showLogin();
@@ -87,6 +96,8 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
             case "Temperature":
                     refCtrl.handleTemperature(Double.valueOf(t[1]));
                 break;
+            case "ADMINMODE":
+                refCtrl.upgradeUser();
         }
     }
 
@@ -141,5 +152,16 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void register(String text, String txtfPasswordText) {
         wrkSocket.sendUserRegistration(text, txtfPasswordText, false);
+    }
+
+    public void killThread() {
+        try {
+            wrkSocket.join();
+            wrkUDP.stopThread();
+            System.gc();
+        } catch (InterruptedException e) {
+            System.exit(2);
+        }
+
     }
 }//end Wrk

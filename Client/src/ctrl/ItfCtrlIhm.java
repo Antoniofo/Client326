@@ -23,4 +23,6 @@ public interface ItfCtrlIhm {
 	void connectRobot();
 
 	void disconnectRobot();
+
+	void killThread();
 }

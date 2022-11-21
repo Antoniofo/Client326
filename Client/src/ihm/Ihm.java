@@ -49,6 +49,8 @@ public class Ihm implements ItfIhmCtrl {
     }
 
     public void startIhm() {
+        ihmClientAdmin.init();
+        ihmClientUser.init();
         ihmLogin.start();
     }
 
@@ -61,6 +63,21 @@ public class Ihm implements ItfIhmCtrl {
                 ihmClientUser.showImage(wr);
             }
         }
+    }
+
+    @Override
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    @Override
+    public void adminMode() {
+        System.out.println("before runlater");
+        Platform.runLater(()->{
+            ihmClientUser.quit();
+            ihmClientAdmin.start();
+        });
+
     }
 
     @Override
@@ -116,16 +133,18 @@ public class Ihm implements ItfIhmCtrl {
     public void showClient(boolean b) {
         if (b) {
             ihmClientAdmin.start();
+            isAdmin = true;
         } else {
             ihmClientUser.start();
+            isAdmin = false;
         }
     }
 
     @Override
     public void showTemperature(double temperature) {
-        if(isAdmin){
+        if (isAdmin) {
             ihmClientAdmin.showTemperature(temperature);
-        }else{
+        } else {
             ihmClientUser.showTemperature(temperature);
         }
     }
@@ -145,5 +164,9 @@ public class Ihm implements ItfIhmCtrl {
 
     public void register(String text, String txtfPasswordText) {
         refCtrl.register(text, txtfPasswordText);
+    }
+
+    public void killThread() {
+        refCtrl.killThread();
     }
 }//end Ihm

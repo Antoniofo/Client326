@@ -35,4 +35,8 @@ public interface ItfIhmCtrl {
 	void showClient(boolean b);
 
 	void showTemperature(double temperature);
+
+    void setUser(String s);
+
+	void adminMode();
 }

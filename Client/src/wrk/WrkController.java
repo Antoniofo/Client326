@@ -13,13 +13,13 @@ import javax.swing.*;
  */
 public class WrkController {
 
-    private XboxController xc = new XboxController();
+    private final static XboxController xc = new XboxController();
     private ItfWrkController refWrk;
     private double leftMagnetude;
     private double rightMagnetude;
 
-    public WrkController() {
-
+    public WrkController(ItfWrkController refWrk) {
+        this.refWrk = refWrk;
     }
 
     /**
@@ -30,7 +30,7 @@ public class WrkController {
 
     }
 
-    public void disconnectController(){
+    public void disconnectController() {
         xc.release();
     }
 
@@ -43,6 +43,7 @@ public class WrkController {
             @Override
             public void leftThumbMagnitude(double magnitude) {
                 leftMagnetude = magnitude;
+                System.out.println(leftMagnetude);
             }
 
             @Override
@@ -53,75 +54,111 @@ public class WrkController {
             @Override
             public void leftThumbDirection(double direction) {
                 boolean pressed = false;
-
-                if ((direction < 45) || (direction >= 315)) {
-                    pressed = (leftMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("LJUP,%s", pressed));
-                } else if ((direction < 135) && (direction >= 45)) {
-                    pressed = (leftMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("LJRIGHT,%s", pressed));
-                } else if ((direction < 225) && (direction >= 135)) {
-                    pressed = (leftMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("LJDOWN,%s", pressed));
-                } else if ((direction < 315) && (direction >= 225)) {
-                    pressed = (leftMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("LJLEFT,%s", pressed));
+                if (leftMagnetude > 0.7) {
+                    if ((direction < 135) && (direction >= 45)) {
+                        refWrk.receiveButton("LJRIGHT");
+                    } else if ((direction < 315) && (direction >= 225)) {
+                        refWrk.receiveButton("LJLEFT");
+                    } else {
+                        refWrk.receiveButton("STOP");
+                    }
                 }
             }
 
             @Override
             public void rightThumbDirection(double direction) {
                 boolean pressed = false;
-                if ((direction < 45) || (direction >= 315)) {
-                    pressed = (rightMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("RJUP,%s", pressed));
-                } else if ((direction < 225) && (direction >= 135)) {
-                    pressed = (rightMagnetude > 0.7) ? true : false;
-                    refWrk.receiveButton(String.format("RJDOWN,%s", pressed));
+                if (((direction < 45) || (direction >= 315)) && rightMagnetude > 0.7 ) {
+                    refWrk.receiveButton("UPHEAD");
+                } else if (((direction < 225) && (direction >= 135))  && rightMagnetude > 0.7 ) {
+                    refWrk.receiveButton("DOWNHEAD");
+                }else{
+                    refWrk.receiveButton("STOPHEAD");
+                }
+            }
+
+            @Override
+            public void rightTrigger(double value) {
+                boolean pressed = (value > 0.0) ? true : false;
+                if (pressed) {
+                    refWrk.receiveButton("RTRIG");
+                }else{
+                    refWrk.receiveButton("STOP");
+                }
+
+            }
+
+            @Override
+            public void leftTrigger(double value) {
+                boolean pressed = (value > 0.0) ? true : false;
+                if (pressed) {
+                    refWrk.receiveButton("LTRIG");
+                }else{
+                    refWrk.receiveButton("STOP");
                 }
             }
 
             @Override
             public void buttonY(boolean pressed) {
-                refWrk.receiveButton(String.format("DOCK,%s", pressed));
+                if (pressed) {
+                    refWrk.receiveButton("DOCK");
+                }
+
             }
 
             @Override
             public void buttonB(boolean pressed) {
-                refWrk.receiveButton(String.format("UNDOCK,%s", pressed));
+                if (pressed) {
+                    refWrk.receiveButton("UNDOCK");
+                }
             }
 
             @Override
             public void buttonX(boolean pressed) {
-                refWrk.receiveButton(String.format("STAND",pressed));
+                if (pressed) {
+                    refWrk.receiveButton("STAND");
+                }
             }
 
             @Override
             public void rightShoulder(boolean pressed) {
-                refWrk.receiveButton(String.format("LED", pressed));
+                if (pressed) {
+                    refWrk.receiveButton("LED");
+                }
+
             }
 
             @Override
             public void dpad(int direction, boolean pressed) {
                 String button = "DPNN";
-                switch (direction) {
-                    case 0:
-                        button = "DPUP";
-                        break;
-                    case 2:
-                        button = "DPRIGHT";
-                        break;
-                    case 4:
-                        button = "DPDOWN";
-                        break;
-                    case 6:
-                        button = "DPLEFT";
-                        break;
-
+                if (pressed) {
+                    switch (direction) {
+                        case 0:
+                            button = "DPUP";
+                            break;
+                        case 2:
+                            button = "DPRIGHT";
+                            break;
+                        case 4:
+                            button = "DPDOWN";
+                            break;
+                        case 6:
+                            button = "DPLEFT";
+                            break;
                     }
-                refWrk.receiveButton(String.format(button+"%s", pressed));
+                    refWrk.receiveButton(button);
+                }
+                waitForSec(500);
             }
         });
         return true;
+    }
+
+    private void waitForSec(int milli) {
+        try {
+            Thread.sleep(milli);
+        } catch (InterruptedException e) {
+            System.out.println("Err");
+        }
     }
 }//end WrkController
