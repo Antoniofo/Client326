@@ -1,6 +1,7 @@
 package ihm;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.embed.swing.JFXPanel;
 import javafx.util.Callback;
@@ -22,7 +23,8 @@ public class IhmLogin implements Initializable {
     private TextField txtfLogin;
     @javafx.fxml.FXML
     private TextField txtf;
-
+    @FXML
+    private TextField srvIP;
     private Ihm link;
 
     public void setLink(Ihm link) {
@@ -92,7 +94,7 @@ public class IhmLogin implements Initializable {
     }
 
     public void register(ActionEvent actionEvent) {
-        boolean k = link.connectToServer("10.18.1.178", 7777);
+        boolean k = link.connectToServer(srvIP.getText(), 7777);
         if (!k) {
             link.showError("Server Not Connected");
         }
@@ -104,7 +106,7 @@ public class IhmLogin implements Initializable {
     }
 
     public void connectToServer(ActionEvent actionEvent) {
-        boolean k = link.connectToServer("10.18.1.178", 7777);
+        boolean k = link.connectToServer(srvIP.getText(), 7777);
         if (!k) {
             link.showError("Server Not Connected");
         }
