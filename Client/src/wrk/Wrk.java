@@ -68,10 +68,10 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     @Override
     public void receiveRFID(String tag) {
-        System.out.println("TAG RECEIVED: "+tag);
+        System.out.println("TAG RECEIVED: " + tag);
         if (tag.equals("5f00d10d9a")) {
             String u = refCtrl.getCurrentUser();
-            if(u != null){
+            if (u != null) {
                 wrkSocket.upgradeUser(u);
             }
         }
@@ -94,7 +94,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
                 refCtrl.showLogin();
                 break;
             case "Temperature":
-                    refCtrl.handleTemperature(Double.valueOf(t[1]));
+                refCtrl.handleTemperature(Double.valueOf(t[1]));
                 break;
             case "ADMINMODE":
                 refCtrl.upgradeUser();
@@ -108,15 +108,17 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     @Override
     public void receiveFrame(BufferedImage image) {
-        WritableImage wr;
-        wr = new WritableImage(image.getWidth(), image.getHeight());
-        PixelWriter pw = wr.getPixelWriter();
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                pw.setArgb(x, y, image.getRGB(x, y));
+        if (image != null) {
+            WritableImage wr;
+            wr = new WritableImage(image.getWidth(), image.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < image.getWidth(); x++) {
+                for (int y = 0; y < image.getHeight(); y++) {
+                    pw.setArgb(x, y, image.getRGB(x, y));
+                }
             }
+            refCtrl.handleFrame(wr);
         }
-        refCtrl.handleFrame(wr);
     }
 
     @Override

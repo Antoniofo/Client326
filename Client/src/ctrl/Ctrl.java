@@ -28,10 +28,6 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     public void start() {
         refIhm.startIhm();
-        boolean k = refWrk.connectToServer("127.0.0.1", 7777);
-        if (!k) {
-            refIhm.showError("Server Not Connected");
-        }
     }
 
     @Override
@@ -80,6 +76,11 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
+    public boolean connectServer(String s, int i) {
+        return refWrk.connectToServer(s,i);
+    }
+
+    @Override
     public void handleTemperature(double temperature) {
         refIhm.showTemperature(temperature);
     }
@@ -101,7 +102,6 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public void upgradeUser() {
-        System.out.println("Upgrade");
         refIhm.setAdmin(true);
         refIhm.adminMode();
     }

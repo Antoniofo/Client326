@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class WrkController {
 
-    private final static XboxController xc = new XboxController();
+    private static XboxController xc;
     private ItfWrkController refWrk;
     private double leftMagnetude;
     private double rightMagnetude;
@@ -35,6 +35,7 @@ public class WrkController {
     }
 
     public boolean connectController() {
+        xc = new XboxController();
         if (!xc.isConnected()) {
             xc.release();
             return false;

@@ -25,4 +25,6 @@ public interface ItfCtrlIhm {
 	void disconnectRobot();
 
 	void killThread();
+
+    boolean connectServer(String s, int i);
 }

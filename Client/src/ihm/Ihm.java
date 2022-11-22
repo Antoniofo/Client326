@@ -169,4 +169,8 @@ public class Ihm implements ItfIhmCtrl {
     public void killThread() {
         refCtrl.killThread();
     }
+
+    public boolean connectToServer(String s, int i) {
+        return refCtrl.connectServer(s,i);
+    }
 }//end Ihm

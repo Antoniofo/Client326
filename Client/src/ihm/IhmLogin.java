@@ -76,6 +76,10 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
+        boolean k = link.connectToServer("127.0.0.1", 7777);
+        if (!k) {
+            link.showError("Server Not Connected");
+        }
         String username = txtfLogin.getText();
         String pwd = txtf.getText();
         if(username != null && pwd != null){

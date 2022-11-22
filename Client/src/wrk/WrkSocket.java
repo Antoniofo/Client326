@@ -18,7 +18,7 @@ public class WrkSocket extends Thread {
 
     public WrkSocket(ItfSocketWrk refWrk) {
         this.refWrk = refWrk;
-
+        socket = new Socket();
     }
 
     /**
@@ -72,16 +72,18 @@ public class WrkSocket extends Thread {
 
 
     public boolean connect(String IP, int port) {
-        try {
-            SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(IP), port);
-            socket = new Socket();
-            socket.connect(socketAddress, 0);
-            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writeMessage("Connected");
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (!socket.isConnected()) {
+            try {
+                SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(IP), port);
+
+                socket.connect(socketAddress, 0);
+                out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                writeMessage("Connected");
+                return true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
         return false;
     }
@@ -115,7 +117,7 @@ public class WrkSocket extends Thread {
     }
 
     public void sendCommand(String button) {
-        writeMessage("CTRL,"+button);
+        writeMessage("CTRL," + button);
     }
 
     public void logOut() {
