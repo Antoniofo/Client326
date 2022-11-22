@@ -4,20 +4,29 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.Button;
 import javafx.util.Callback;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import javax.swing.SwingUtilities;
 
 
 public class IhmLogin implements Initializable {
+
+    @FXML
+    public Button btnLogin;
+    @FXML
+    public Button btnRegister;
     private Stage stage;
     @javafx.fxml.FXML
     private TextField txtfLogin;
@@ -39,7 +48,7 @@ public class IhmLogin implements Initializable {
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
+    public void start() {
         IhmLogin myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -63,8 +72,10 @@ public class IhmLogin implements Initializable {
                     stage.setResizable(false);
                     stage.setScene(scene);
                     stage.setTitle("Login");
+                    btnRegister.setDisable(true);
+                    btnLogin.setDisable(true);
                     stage.show();
-                    stage.setOnCloseRequest((e)-> {
+                    stage.setOnCloseRequest((e) -> {
                         link.killThread();
                         e.consume();
                         System.exit(0);
@@ -78,14 +89,10 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        boolean k = link.connectToServer("10.18.1.178", 7777);
-        if (!k) {
-            link.showError("Server Not Connected");
-        }
         String username = txtfLogin.getText();
         String pwd = txtf.getText();
-        if(username != null && pwd != null){
-            if(!(username.equals("") || pwd.equals(""))){
+        if (username != null && pwd != null) {
+            if (!(username.equals("") || pwd.equals(""))) {
                 link.logIn(username, pwd);
                 quit();
             }
@@ -94,14 +101,10 @@ public class IhmLogin implements Initializable {
     }
 
     public void register(ActionEvent actionEvent) {
-        boolean k = link.connectToServer(srvIP.getText(), 7777);
-        if (!k) {
-            link.showError("Server Not Connected");
-        }
         link.showRegister();
     }
 
-    public void quit(){
+    public void quit() {
         stage.close();
     }
 
@@ -109,6 +112,9 @@ public class IhmLogin implements Initializable {
         boolean k = link.connectToServer(srvIP.getText(), 7777);
         if (!k) {
             link.showError("Server Not Connected");
+        }else{
+            btnRegister.setDisable(false);
+            btnLogin.setDisable(false);
         }
     }
 }

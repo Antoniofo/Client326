@@ -36,7 +36,7 @@ public class WrkPhidget {
 				@Override
 				public void onHumidityChange(HumiditySensorHumidityChangeEvent humidity) {
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(20000);
 						refWrk.receiveHumidity(humidity.getHumidity());
 					} catch (InterruptedException e) {
 						throw new RuntimeException(e);

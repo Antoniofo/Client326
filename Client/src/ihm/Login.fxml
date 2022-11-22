@@ -51,12 +51,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#login" text="Login">
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" text="Login">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#register" text="Register" GridPane.columnIndex="1">
+            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#register" text="Register" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
