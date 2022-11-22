@@ -76,7 +76,7 @@ public class IhmLogin implements Initializable {
     }
 
     public void login(ActionEvent actionEvent) {
-        boolean k = link.connectToServer("127.0.0.1", 7777);
+        boolean k = link.connectToServer("10.18.1.178", 7777);
         if (!k) {
             link.showError("Server Not Connected");
         }
@@ -92,6 +92,10 @@ public class IhmLogin implements Initializable {
     }
 
     public void register(ActionEvent actionEvent) {
+        boolean k = link.connectToServer("10.18.1.178", 7777);
+        if (!k) {
+            link.showError("Server Not Connected");
+        }
         link.showRegister();
     }
 

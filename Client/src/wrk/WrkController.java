@@ -55,25 +55,27 @@ public class WrkController {
             @Override
             public void leftThumbDirection(double direction) {
                 boolean pressed = false;
-                if (leftMagnetude > 0.7) {
-                    if ((direction < 135) && (direction >= 45)) {
+                if (leftMagnetude > 0.1) {
+                    if ((direction < 135) && (direction >= 45) && leftMagnetude > 0.7) {
                         refWrk.receiveButton("LJRIGHT");
-                    } else if ((direction < 315) && (direction >= 225)) {
+                    } else if ((direction < 315) && (direction >= 225) && leftMagnetude > 0.7) {
                         refWrk.receiveButton("LJLEFT");
                     } else {
                         refWrk.receiveButton("STOP");
                     }
                 }
+
+
             }
 
             @Override
             public void rightThumbDirection(double direction) {
                 boolean pressed = false;
-                if (((direction < 45) || (direction >= 315)) && rightMagnetude > 0.7 ) {
+                if (((direction < 45) || (direction >= 315)) && rightMagnetude > 0.7) {
                     refWrk.receiveButton("UPHEAD");
-                } else if (((direction < 225) && (direction >= 135))  && rightMagnetude > 0.7 ) {
+                } else if (((direction < 225) && (direction >= 135)) && rightMagnetude > 0.7) {
                     refWrk.receiveButton("DOWNHEAD");
-                }else{
+                } else {
                     refWrk.receiveButton("STOPHEAD");
                 }
             }
@@ -83,7 +85,7 @@ public class WrkController {
                 boolean pressed = (value > 0.0) ? true : false;
                 if (pressed) {
                     refWrk.receiveButton("RTRIG");
-                }else{
+                } else {
                     refWrk.receiveButton("STOP");
                 }
 
@@ -94,7 +96,7 @@ public class WrkController {
                 boolean pressed = (value > 0.0) ? true : false;
                 if (pressed) {
                     refWrk.receiveButton("LTRIG");
-                }else{
+                } else {
                     refWrk.receiveButton("STOP");
                 }
             }
