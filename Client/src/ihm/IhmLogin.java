@@ -102,5 +102,12 @@ public class IhmLogin implements Initializable {
     public void quit(){
         stage.close();
     }
+
+    public void connectToServer(ActionEvent actionEvent) {
+        boolean k = link.connectToServer("10.18.1.178", 7777);
+        if (!k) {
+            link.showError("Server Not Connected");
+        }
+    }
 }
 
