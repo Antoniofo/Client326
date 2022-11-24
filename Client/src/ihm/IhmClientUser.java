@@ -126,7 +126,8 @@ public class IhmClientUser {
             screenRobot.setVisible(true);
             screenRobot.setImage(wr);
         } else {
-            link.showError("Can't show image");
+            //TODO ERR handling
+            System.out.println("ERR");
         }
     }
 

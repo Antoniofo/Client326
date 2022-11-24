@@ -30,9 +30,8 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
         try {
             wrkSocket = new WrkSocket(this);
             wrkSocket.start();
-            wrkUDP = new WrkUDP();
-            wrkUDP.setRefWrk(this);
-            wrkUDP.launchThread();
+            wrkUDP = new WrkUDP(this);
+            wrkUDP.start();
 
             wrkPhidget = new WrkPhidget(this);
             wrkController = new WrkController(this);
@@ -158,8 +157,12 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public void killThread() {
         try {
+            wrkSocket.setRuning(false);
             wrkSocket.join();
-            wrkUDP.stopThread();
+            wrkUDP.setRunningImg(false);
+            wrkUDP.disconnect();
+            wrkUDP.join();
+
             System.gc();
         } catch (InterruptedException e) {
             System.exit(2);

@@ -11,6 +11,11 @@ import java.net.*;
 public class WrkSocket extends Thread {
 
     private BufferedReader in;
+
+    public void setRuning(boolean runing) {
+        this.runing = runing;
+    }
+
     private BufferedWriter out;
     private volatile boolean runing;
     private volatile Socket socket;

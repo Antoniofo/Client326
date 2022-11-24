@@ -112,6 +112,7 @@ public class IhmLogin implements Initializable {
         boolean k = link.connectToServer(srvIP.getText(), 7777);
         if (!k) {
             link.showError("Server Not Connected");
+            quit();
         }else{
             btnRegister.setDisable(false);
             btnLogin.setDisable(false);

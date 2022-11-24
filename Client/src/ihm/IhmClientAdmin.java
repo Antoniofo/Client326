@@ -127,7 +127,8 @@ public class IhmClientAdmin implements Initializable
             screenRobot.setVisible(true);
             screenRobot.setImage(wr);
         }else{
-            link.showError("Can't show Image");
+            //TODO ERR handling
+            System.out.println("ERR");
         }
     }
 

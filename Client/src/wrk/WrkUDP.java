@@ -15,27 +15,17 @@ import java.util.Arrays;
  * @version 1.0
  * @created 11-nov.-2022 11:04:09
  */
-public class WrkUDP {
+public class WrkUDP extends Thread {
 
-    private boolean runningImg;
-    private boolean runningAudio;
-    private Thread threadAudio;
-    private Thread threadImg;
+    private volatile boolean runningImg;
+
     private byte[] bufImg = new byte[65565];
-    private DatagramSocket socketUDPVideo;
-
-    private DatagramSocket socketUDPAudio;
-
-    private byte[] bufAudio = new byte[65565];
+    private DatagramSocket uDPVideo;
     public ItfWrkUDP refWrk;
 
-    public void setRefWrk(ItfWrkUDP refWrk) {
+    public WrkUDP(ItfWrkUDP refWrk) throws SocketException {
         this.refWrk = refWrk;
-    }
-
-    public WrkUDP() throws SocketException {
-        socketUDPVideo = new DatagramSocket(42069);
-        socketUDPAudio = new DatagramSocket(42070);
+        uDPVideo = new DatagramSocket(42069);
     }
 
     /**
@@ -46,46 +36,27 @@ public class WrkUDP {
 
     }
 
-    public void launchThread() {
-        threadImg = new Thread("UDP Image") {
-            @Override
-            public void run() {
-                runningImg = true;
-                while (runningImg) {
-                    try {
-                        DatagramPacket dp = new DatagramPacket(bufImg, bufImg.length);
-                        socketUDPVideo.receive(dp);
-                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(dp.getData()));
 
-                        refWrk.receiveFrame(image);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        threadAudio = new Thread("UDP Audio") {
-            @Override
-            public void run() {
-                runningAudio = true;
-                while (runningAudio) {
-                    try {
-                        DatagramPacket dp = new DatagramPacket(bufAudio, bufAudio.length);
-                        socketUDPAudio.receive(dp);
+    @Override
+    public void run() {
+        runningImg = true;
+        while (runningImg) {
+            try {
+                DatagramPacket dp = new DatagramPacket(bufImg, bufImg.length);
+                uDPVideo.receive(dp);
+                BufferedImage image = ImageIO.read(new ByteArrayInputStream(dp.getData()));
 
-                        refWrk.receiveAudio(dp.getData());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                refWrk.receiveFrame(image);
+            } catch (IOException e) {
             }
-        };
-        threadImg.start();
-        threadAudio.start();
+        }
     }
 
-    public void stopThread() throws InterruptedException {
-        threadImg.join();
-        threadAudio.join();
+    public void setRunningImg(boolean runningImg) {
+        this.runningImg = runningImg;
+    }
+
+    public void disconnect() {
+        uDPVideo.close();
     }
 }//end WrkUDP
