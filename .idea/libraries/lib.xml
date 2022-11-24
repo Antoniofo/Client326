@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Client/lib/phidget22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/XboxController.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/log4j-api-2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/dronecontroller-0.2.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jackson-databind-2.7.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/dronecontroller-0.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/log4j-core-2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/slf4j-api-1.7.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jackson-core-2.7.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/dronecontroller-0.2.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jaw.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/log4j-slf4j-impl-2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jackson-annotations-2.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
