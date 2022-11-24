@@ -34,10 +34,7 @@ public class IhmClientAdmin implements Initializable
     private TextField txtfRobotStatus;
     @javafx.fxml.FXML
     private TextField txtfControllerStatus;
-    @javafx.fxml.FXML
-    private CheckBox cbxMicrophone;
-    @javafx.fxml.FXML
-    private CheckBox cbxSound;
+
     private Ihm link;
     public void setLink(Ihm link) {
         this.link = link;

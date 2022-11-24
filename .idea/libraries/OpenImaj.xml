@@ -1,0 +1,52 @@
+<component name="libraryTable">
+  <library name="OpenImaj">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/apache-logging-log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/image-processing-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/faces-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/video-processing-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-audio-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/IREval-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/slf4j-1.7.25.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-feature-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/image-feature-extraction-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/kryo-2.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/org-apache-commons-codec.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/apache-commons-sanselan.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-tool-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/colt-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/FaceTracker-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/Jama-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-math-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/MatrixLib-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/commons-vfs2-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/xuggle-video-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-video-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/JTransforms-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-experiment-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/klt-tracker-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/object-detection-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/machine-learning-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/xmlpull-xpp3-1.1.4c.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/clustering-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-hadoop-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-citation-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/org-apache-commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-aop-support-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/trove-3.0.0a1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/animation-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/apache-jakarta-commons-httpclient.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/image-local-features-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/BezierUtils-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/arpack-combo-0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/ImprovedArgs4J-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-image-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/bridj-0.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/nearest-neighbour-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/OpenImaj/core-video-capture-1.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
