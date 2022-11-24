@@ -49,14 +49,16 @@ public class WrkSocket extends Thread {
         runing = true;
         while (runing) {
             if (socket != null && in != null) {
-                if (socket.isConnected()) {
+                if (socket.isConnected() && !(socket.isClosed())) {
+                    refWrk.statusServer(true);
                     String message = readMessages();
                     if (message != null) {
-                        System.out.println(message);
                         refWrk.handleOrder(message);
                     }
-                }
+                }refWrk.statusServer(false);
+
             }
+
             try {
                 sleep(10);
             } catch (InterruptedException e) {
@@ -76,7 +78,7 @@ public class WrkSocket extends Thread {
     }
 
 
-    public boolean connect(String IP, int port) {
+    public int connect(String IP, int port) {
         if (!socket.isConnected()) {
             try {
                 SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(IP), port);
@@ -85,12 +87,22 @@ public class WrkSocket extends Thread {
                 out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 writeMessage("Connected");
-                return true;
+                return 0;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                try {
+                    socket.close();
+                    socket = new Socket();
+                } catch (IOException ex) {
+                }
+                return 2;
             }
         }
-        return false;
+        try {
+            socket.close();
+            socket = new Socket();
+        } catch (IOException e) {
+        }
+        return 1;
     }
 
     public void sendUserRegistration(String username, String password, boolean isAdmin) {
@@ -110,7 +122,6 @@ public class WrkSocket extends Thread {
         if (socket != null) {
             try {
                 socket.close();
-                socket = null;
             } catch (IOException e) {
 
             }

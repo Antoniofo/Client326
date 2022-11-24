@@ -1,6 +1,5 @@
 package ihm;
 
-import ctrl.Ctrl;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
@@ -8,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -20,8 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class IhmClientAdmin implements Initializable
-{
+public class IhmClientAdmin implements Initializable {
     private final String fxml = "/ihm/ClientAdmin.fxml";
     private Stage stage;
     @javafx.fxml.FXML
@@ -36,6 +33,7 @@ public class IhmClientAdmin implements Initializable
     private TextField txtfControllerStatus;
 
     private Ihm link;
+
     public void setLink(Ihm link) {
         this.link = link;
     }
@@ -62,9 +60,9 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void connectController(ActionEvent actionEvent) {
-        if(link.connnectConttroller()){
+        if (link.connnectConttroller()) {
             txtfControllerStatus.setText("Controller Connection Successfull");
-        }else{
+        } else {
             txtfControllerStatus.setText("Controller Connection Failed");
         }
     }
@@ -73,7 +71,7 @@ public class IhmClientAdmin implements Initializable
         link.connnectRobot();
     }
 
-    public void init(){
+    public void init() {
         IhmClientAdmin myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -98,7 +96,7 @@ public class IhmClientAdmin implements Initializable
                     stage.setScene(scene);
                     stage.setTitle("Client Admin");
 
-                    stage.setOnCloseRequest((e)-> {
+                    stage.setOnCloseRequest((e) -> {
                         link.killThread();
                         e.consume();
                         System.exit(0);
@@ -112,24 +110,22 @@ public class IhmClientAdmin implements Initializable
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
-        Platform.runLater(()->{
+    public void start() {
+        Platform.runLater(() -> {
             stage.show();
         });
 
     }
 
     public void showImage(WritableImage wr) {
-        if(wr != null && screenRobot != null){
+        if (wr != null && screenRobot != null) {
             screenRobot.setVisible(true);
             screenRobot.setImage(wr);
-        }else{
-            //TODO ERR handling
-            System.out.println("ERR");
+        } else {
         }
     }
 
-    public void quit(){
+    public void quit() {
         stage.close();
     }
 
@@ -138,6 +134,16 @@ public class IhmClientAdmin implements Initializable
     }
 
     public void showTemperature(double temperature) {
-        txtTemperature.setText(temperature+"°C");
+        txtTemperature.setText(temperature + "°C");
+    }
+
+    public void setServerStatus(boolean b) {
+        Platform.runLater(() -> {
+            if (b) {
+                txtfRobotStatus.setText("Server Connected");
+            } else {
+                txtfRobotStatus.setText("Server not Connected");
+            }
+        });
     }
 }

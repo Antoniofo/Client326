@@ -25,4 +25,6 @@ public interface ItfCtrlWrk {
     void showLogin();
 
     void setCurrentUser(String s);
+
+    void statusServer(boolean b);
 }

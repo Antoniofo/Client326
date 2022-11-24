@@ -8,4 +8,6 @@ package wrk;
 public interface ItfSocketWrk {
 
     void handleOrder(String message);
+
+    void statusServer(boolean b);
 }

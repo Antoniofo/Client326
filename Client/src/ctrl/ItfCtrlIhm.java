@@ -26,5 +26,5 @@ public interface ItfCtrlIhm {
 
 	void killThread();
 
-    boolean connectServer(String s, int i);
+    int connectServer(String s, int i);
 }

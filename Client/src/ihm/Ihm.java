@@ -72,11 +72,20 @@ public class Ihm implements ItfIhmCtrl {
 
     @Override
     public void adminMode() {
-        System.out.println("before runlater");
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             ihmClientUser.quit();
             ihmClientAdmin.start();
         });
+
+    }
+
+    @Override
+    public void statusServer(boolean b) {
+
+            ihmClientAdmin.setServerStatus(b);
+            ihmClientUser.setServerStatus(b);
+
+
 
     }
 
@@ -138,6 +147,7 @@ public class Ihm implements ItfIhmCtrl {
             ihmClientUser.start();
             isAdmin = false;
         }
+        ihmLogin.quit();
     }
 
     @Override
@@ -170,7 +180,11 @@ public class Ihm implements ItfIhmCtrl {
         refCtrl.killThread();
     }
 
-    public boolean connectToServer(String s, int i) {
-        return refCtrl.connectServer(s,i);
+    public int connectToServer(String s, int i) {
+        return refCtrl.connectServer(s, i);
+    }
+
+    public void tryAgain() {
+        refCtrl.tryAgain();
     }
 }//end Ihm

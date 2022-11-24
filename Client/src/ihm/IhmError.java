@@ -65,6 +65,7 @@ public class IhmError
 
     public void tryAgain(ActionEvent actionEvent) {
         link.showLogin();
+        link.tryAgain();
         quit();
     }
 

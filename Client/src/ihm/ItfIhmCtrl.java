@@ -39,4 +39,6 @@ public interface ItfIhmCtrl {
     void setUser(String s);
 
 	void adminMode();
+
+    void statusServer(boolean b);
 }

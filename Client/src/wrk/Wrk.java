@@ -28,8 +28,7 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     public Wrk() {
         try {
-            wrkSocket = new WrkSocket(this);
-            wrkSocket.start();
+
             wrkUDP = new WrkUDP(this);
             wrkUDP.start();
 
@@ -50,9 +49,9 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     }
 
 
-    public boolean connectToServer(String ip, int port) {
-        boolean ok = wrkSocket.connect(ip, port);
-        return ok;
+    public int connectToServer(String ip, int port) {
+        return wrkSocket.connect(ip, port);
+
     }
 
     public boolean connectController() {
@@ -67,7 +66,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
 
     @Override
     public void receiveRFID(String tag) {
-        System.out.println("TAG RECEIVED: " + tag);
         if (tag.equals("5f00d10d9a")) {
             String u = refCtrl.getCurrentUser();
             if (u != null) {
@@ -79,7 +77,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     @Override
     public void handleOrder(String message) {
         String[] t = message.split(",");
-        System.out.println(t);
         switch (t[0]) {
             case "LOGINUSER":
                 refCtrl.showClient(false);
@@ -98,6 +95,11 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
             case "ADMINMODE":
                 refCtrl.upgradeUser();
         }
+    }
+
+    @Override
+    public void statusServer(boolean b) {
+        refCtrl.statusServer(b);
     }
 
     @Override
@@ -120,12 +122,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
         }
     }
 
-    @Override
-    public void receiveAudio(byte[] data) {
-        AudioData ad = new AudioData(data);
-        AudioDataStream ads = new AudioDataStream(ad);
-        AudioPlayer.player.start(ads);
-    }
 
     public void setRefCtrl(ItfCtrlWrk refCtrl) {
         this.refCtrl = refCtrl;
@@ -168,5 +164,14 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
             System.exit(2);
         }
 
+    }
+
+    public void tryAgain() {
+        wrkSocket.disconnect();
+    }
+
+    public void startServer() {
+        wrkSocket = new WrkSocket(this);
+        wrkSocket.start();
     }
 }//end Wrk

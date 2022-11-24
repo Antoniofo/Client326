@@ -28,6 +28,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     public void start() {
         refIhm.startIhm();
+        refWrk.startServer();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public void tryAgain() {
-
+        refWrk.tryAgain();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     }
 
     @Override
-    public boolean connectServer(String s, int i) {
+    public int connectServer(String s, int i) {
         return refWrk.connectToServer(s,i);
     }
 
@@ -119,6 +120,11 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
     @Override
     public void setCurrentUser(String s) {
         refIhm.setUser(s);
+    }
+
+    @Override
+    public void statusServer(boolean b) {
+        refIhm.statusServer(b);
     }
 
     public void setRefIhm(ItfIhmCtrl refIhm) {

@@ -126,8 +126,6 @@ public class IhmClientUser {
             screenRobot.setVisible(true);
             screenRobot.setImage(wr);
         } else {
-            //TODO ERR handling
-            System.out.println("ERR");
         }
     }
 
@@ -137,5 +135,16 @@ public class IhmClientUser {
 
     public void showTemperature(double temperature) {
         txtTemperature.setText(temperature + "°C");
+    }
+
+    public void setServerStatus(boolean b) {
+        Platform.runLater(() -> {
+            if (b) {
+                txtfRobotStatus.setText("Server Connected");
+            } else {
+                txtfRobotStatus.setText("Server not Connected");
+            }
+        });
+
     }
 }

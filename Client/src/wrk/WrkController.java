@@ -44,7 +44,6 @@ public class WrkController {
             @Override
             public void leftThumbMagnitude(double magnitude) {
                 leftMagnetude = magnitude;
-                System.out.println(leftMagnetude);
             }
 
             @Override

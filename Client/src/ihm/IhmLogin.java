@@ -1,5 +1,6 @@
 package ihm;
 
+import beans.JfxPopup;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -94,7 +95,6 @@ public class IhmLogin implements Initializable {
         if (username != null && pwd != null) {
             if (!(username.equals("") || pwd.equals(""))) {
                 link.logIn(username, pwd);
-                quit();
             }
         }
 
@@ -105,18 +105,23 @@ public class IhmLogin implements Initializable {
     }
 
     public void quit() {
-        stage.close();
+        Platform.runLater(()->{
+            stage.close();
+        });
+
     }
 
     public void connectToServer(ActionEvent actionEvent) {
-        boolean k = link.connectToServer(srvIP.getText(), 7777);
-        if (!k) {
-            link.showError("Server Not Connected");
-            quit();
-        }else{
+        int err = link.connectToServer(srvIP.getText(), 7777);
+        if(err == 0){
             btnRegister.setDisable(false);
             btnLogin.setDisable(false);
+        }else if (err == 1){
+            JfxPopup.displayError("Error", "Connection", "The Server you are trying to connect is already connected");
+        }else{
+            JfxPopup.displayError("Error", "Connection", "Couldn't contact server");
         }
+
     }
 }
 
