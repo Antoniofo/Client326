@@ -1,5 +1,7 @@
 package wrk;
 
+import beans.JfxPopup;
+
 import java.io.*;
 import java.net.*;
 
@@ -90,8 +92,10 @@ public class WrkSocket extends Thread {
                 return 0;
             } catch (Exception e) {
                 try {
+
                     socket.close();
                     socket = new Socket();
+                    JfxPopup.displayError("Error","You have been disconnected from the server.", "Disconnected from the server.");
                 } catch (IOException ex) {
                 }
                 return 2;
