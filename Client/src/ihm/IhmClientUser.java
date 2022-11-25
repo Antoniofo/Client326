@@ -30,10 +30,6 @@ public class IhmClientUser {
     private TextField txtfRobotStatus;
     @javafx.fxml.FXML
     private TextField txtfControllerStatus;
-    @javafx.fxml.FXML
-    private CheckBox cbxMicrophone;
-    @javafx.fxml.FXML
-    private CheckBox cbxSound;
     private Ihm link;
 
     public void setLink(Ihm link) {
@@ -58,7 +54,6 @@ public class IhmClientUser {
 
     public void disconnectRobot(ActionEvent actionEvent) {
         link.disconnectRobot();
-        txtfRobotStatus.setText("Robot Disconnected");
     }
 
     public void connectController(ActionEvent actionEvent) {
@@ -137,18 +132,10 @@ public class IhmClientUser {
         txtTemperature.setText(temperature + "°C");
     }
 
-    public void setServerStatus(boolean b) {
-        Platform.runLater(() -> {
-            if (b) {
-                txtfRobotStatus.setText("Server Connected");
-            } else {
-                txtfRobotStatus.setText("Server not Connected");
-            }
-        });
-
-    }
 
     public boolean isShown() {
         return stage.isShowing();
     }
+
+
 }

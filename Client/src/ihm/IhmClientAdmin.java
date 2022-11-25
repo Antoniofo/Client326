@@ -28,8 +28,6 @@ public class IhmClientAdmin implements Initializable {
     @javafx.fxml.FXML
     private TextField txtTemperature;
     @javafx.fxml.FXML
-    private TextField txtfRobotStatus;
-    @javafx.fxml.FXML
     private TextField txtfControllerStatus;
 
     private Ihm link;
@@ -56,7 +54,6 @@ public class IhmClientAdmin implements Initializable {
 
     public void disconnectRobot(ActionEvent actionEvent) {
         link.disconnectRobot();
-        txtfRobotStatus.setText("Robot Disconnected");
     }
 
     public void connectController(ActionEvent actionEvent) {
@@ -137,17 +134,10 @@ public class IhmClientAdmin implements Initializable {
         txtTemperature.setText(temperature + "°C");
     }
 
-    public void setServerStatus(boolean b) {
-        Platform.runLater(() -> {
-            if (b) {
-                txtfRobotStatus.setText("Server Connected");
-            } else {
-                txtfRobotStatus.setText("Server not Connected");
-            }
-        });
-    }
 
     public boolean isShown() {
         return stage.isShowing();
     }
+
+
 }

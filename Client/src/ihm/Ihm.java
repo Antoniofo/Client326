@@ -84,13 +84,21 @@ public class Ihm implements ItfIhmCtrl {
     public void statusServer(boolean b) {
         if (!b && (ihmClientAdmin.isShown() || ihmClientUser.isShown())) {
             Platform.runLater(() -> {
-                JfxPopup.displayError("Error","You have been disconnected from the server.", "Disconnected from the server.");
                 ihmLogin.start();
                 ihmClientAdmin.quit();
                 ihmClientUser.quit();
             });
         }
     }
+
+    @Override
+    public void alert() {
+        Platform.runLater(()->{
+            JfxPopup.displayError("Alert", "Weather Condition", "The weather condition are not convenable");
+        });
+
+    }
+
 
     @Override
     public void setAdmin(boolean admin) {

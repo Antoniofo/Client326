@@ -41,4 +41,6 @@ public interface ItfIhmCtrl {
 	void adminMode();
 
     void statusServer(boolean b);
+
+	void alert();
 }

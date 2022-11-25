@@ -127,6 +127,12 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
         refIhm.statusServer(b);
     }
 
+    @Override
+    public void alert() {
+        refIhm.alert();
+    }
+
+
     public void setRefIhm(ItfIhmCtrl refIhm) {
         this.refIhm = refIhm;
     }

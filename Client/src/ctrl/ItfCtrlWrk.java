@@ -11,9 +11,9 @@ import org.openimaj.image.MBFImage;
  */
 public interface ItfCtrlWrk {
     public void handleTemperature(double temperature);
-    
+
     public void handleHumidity(double humdity);
-    
+
     public void handleFrame(WritableImage wr);
 
     String getCurrentUser();
@@ -27,4 +27,6 @@ public interface ItfCtrlWrk {
     void setCurrentUser(String s);
 
     void statusServer(boolean b);
+
+    void alert();
 }

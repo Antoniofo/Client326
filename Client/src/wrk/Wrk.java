@@ -92,6 +92,10 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
                 break;
             case "ADMINMODE":
                 refCtrl.upgradeUser();
+                break;
+            case "ALERT":
+                refCtrl.alert();
+break;
         }
     }
 
