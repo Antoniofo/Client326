@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,7 +34,7 @@ public class IhmLogin implements Initializable {
     @javafx.fxml.FXML
     private TextField txtfLogin;
     @javafx.fxml.FXML
-    private TextField txtf;
+    private PasswordField txtfPassword;
     @FXML
     private TextField srvIP;
     private Ihm link;
@@ -91,7 +93,7 @@ public class IhmLogin implements Initializable {
 
     public void login(ActionEvent actionEvent) {
         String username = txtfLogin.getText();
-        String pwd = txtf.getText();
+        String pwd = txtfPassword.getText();
         if (username != null && pwd != null) {
             if (!(username.equals("") || pwd.equals(""))) {
                 link.logIn(username, pwd);
