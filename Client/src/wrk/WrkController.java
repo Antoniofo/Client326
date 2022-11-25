@@ -18,22 +18,25 @@ public class WrkController {
     private double leftMagnetude;
     private double rightMagnetude;
 
+    /**
+     * Constructor of WrkController
+     * @param refWrk reference of the Wrk
+     */
     public WrkController(ItfWrkController refWrk) {
         this.refWrk = refWrk;
     }
 
     /**
-     * @throws Throwable
+     * Disconnects the Xbox One controller
      */
-    public void finalize()
-            throws Throwable {
-
-    }
-
     public void disconnectController() {
         xc.release();
     }
 
+    /**
+     * Connects the Xbox One controller
+     * @return true if the connection is successful.
+     */
     public boolean connectController() {
         xc = new XboxController();
         if (!xc.isConnected()) {
@@ -156,6 +159,10 @@ public class WrkController {
         return true;
     }
 
+    /**
+     * Makes the Thread sleeps for a certain period.
+     * @param milli time in ms
+     */
     private void waitForSec(int milli) {
         try {
             Thread.sleep(milli);

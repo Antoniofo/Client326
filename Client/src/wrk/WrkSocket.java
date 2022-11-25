@@ -14,28 +14,34 @@ public class WrkSocket extends Thread {
 
     private BufferedReader in;
 
-    public void setRuning(boolean runing) {
-        this.runing = runing;
-    }
+
 
     private BufferedWriter out;
     private volatile boolean runing;
     private volatile Socket socket;
     public ItfSocketWrk refWrk;
 
+    /**
+     *Constructor of WrkSocket
+     * @param refWrk reference to the Wrk
+     */
     public WrkSocket(ItfSocketWrk refWrk) {
         this.refWrk = refWrk;
         socket = new Socket();
     }
 
     /**
-     * @throws Throwable
+     * Change the status of the Thread.
+     * @param runing Value of the new Thread status.
      */
-    public void finalize()
-            throws Throwable {
-
+    public void setRuning(boolean runing) {
+        this.runing = runing;
     }
 
+    /**
+     * Read the message sent by the server.
+     * @return the message sent or null if the connection is lost.
+     */
     private String readMessages() {
         String message = null;
         try {
@@ -46,6 +52,9 @@ public class WrkSocket extends Thread {
         return message;
     }
 
+    /**
+     * Listen to server messages.
+     */
     @Override
     public void run() {
         runing = true;
@@ -76,6 +85,10 @@ public class WrkSocket extends Thread {
         }
     }
 
+    /**
+     * Sends a message to the server.
+     * @param message the message that has to be sent.
+     */
     private void writeMessage(String message) {
         if (out != null && message != null) {
             try {
@@ -86,7 +99,12 @@ public class WrkSocket extends Thread {
         }
     }
 
-
+    /**
+     * Connects to the server.
+     * @param IP The server's IP address
+     * @param port The server's port
+     * @return 0 if the connection is successful. 2 if the connection fails. 1 if the connection has already been established.
+     */
     public int connect(String IP, int port) {
         if (!socket.isConnected()) {
             try {
@@ -114,19 +132,36 @@ public class WrkSocket extends Thread {
         return 1;
     }
 
+    /**
+     * Sends user registration request.
+     * @param username username of the user
+     * @param password password of the user
+     * @param isAdmin privilege of the user
+     */
     public void sendUserRegistration(String username, String password, boolean isAdmin) {
         writeMessage(String.format("register,%s,%s,%s", username, password, isAdmin));
     }
 
+    /**
+     * Sends login check request
+     * @param username username of the user
+     * @param password password of the user
+     */
     public void sendLoginCheck(String username, String password) {
         writeMessage(String.format("checklogin,%s,%s", username, password));
     }
 
+    /**
+     * Sends the humidity to the server
+     * @param hum Humidity value
+     */
     public void sendHumidity(double hum) {
         writeMessage(String.format("humidity,%s", hum));
     }
 
-
+    /**
+     * Close the socket and disconnects to the server.
+     */
     public void disconnect() {
         if (socket != null) {
             try {
@@ -137,22 +172,39 @@ public class WrkSocket extends Thread {
         }
     }
 
+    /**
+     * upgrade current user to administrator.
+     * @param currentUser the current user to upgrade
+     */
     public void upgradeUser(String currentUser) {
         writeMessage(String.format("upgrade,%s", currentUser));
     }
 
+    /**
+     * Sends Xbox One controller keys to the server
+     * @param button button to send
+     */
     public void sendCommand(String button) {
         writeMessage("CTRL," + button);
     }
 
+    /**
+     * Send logout message to the server.
+     */
     public void logOut() {
         writeMessage("logout");
     }
 
+    /**
+     * Send robot connection request.
+     */
     public void sendRobotInit() {
         writeMessage("ROBOTINIT");
     }
 
+    /**
+     * Send robot disconnection request
+     */
     public void sendRobotDisconnect() {
         writeMessage("ROBOTSHUT");
     }

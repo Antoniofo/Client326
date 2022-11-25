@@ -107,7 +107,7 @@ public class IhmLogin implements Initializable {
     }
 
     public void quit() {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             stage.close();
         });
 
@@ -115,12 +115,12 @@ public class IhmLogin implements Initializable {
 
     public void connectToServer(ActionEvent actionEvent) {
         int err = link.connectToServer(srvIP.getText(), 7777);
-        if(err == 0){
+        if (err == 0) {
             btnRegister.setDisable(false);
             btnLogin.setDisable(false);
-        }else if (err == 1){
+        } else if (err == 1) {
             JfxPopup.displayError("Error", "Connection", "The Server you are trying to connect is already connected");
-        }else{
+        } else {
             JfxPopup.displayError("Error", "Connection", "Couldn't contact server");
         }
 

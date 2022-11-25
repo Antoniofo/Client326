@@ -13,8 +13,7 @@ import javafx.util.Callback;
 import javax.swing.*;
 import java.io.IOException;
 
-public class IhmRegister
-{
+public class IhmRegister {
     private Stage stage;
     private final String fxml = "/ihm/Register.fxml";
     @javafx.fxml.FXML
@@ -34,7 +33,7 @@ public class IhmRegister
     }
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public void start(){
+    public void start() {
         IhmRegister myself = this;
 
         Callback<Class<?>, Object> controllerFactory = type -> {
@@ -67,12 +66,13 @@ public class IhmRegister
         });
     }
 
-    public void quit(){
+    public void quit() {
         stage.close();
     }
+
     public void registerAccount(ActionEvent actionEvent) {
-        if(txtfConfirmPassword.getText().equals(txtfPassword.getText())){
-            link.register(txtfUsername.getText(),txtfPassword.getText());
+        if (txtfConfirmPassword.getText().equals(txtfPassword.getText())) {
+            link.register(txtfUsername.getText(), txtfPassword.getText());
             quit();
         }
 

@@ -23,20 +23,20 @@ public class WrkUDP extends Thread {
     private DatagramSocket uDPVideo;
     public ItfWrkUDP refWrk;
 
+    /**
+     * Constructor of WrkUdp.
+     * @param refWrk reference to the Wrk
+     * @throws SocketException
+     */
     public WrkUDP(ItfWrkUDP refWrk) throws SocketException {
         this.refWrk = refWrk;
         uDPVideo = new DatagramSocket(42069);
     }
 
+
     /**
-     * @throws Throwable
+     * Will receive a UDP packet and it will send it to the Wrk to show the image.
      */
-    public void finalize()
-            throws Throwable {
-
-    }
-
-
     @Override
     public void run() {
         runningImg = true;
@@ -52,10 +52,17 @@ public class WrkUDP extends Thread {
         }
     }
 
+    /**
+     * Permit to pause the thread.
+     * @param runningImg Value of running for the thread.
+     */
     public void setRunningImg(boolean runningImg) {
         this.runningImg = runningImg;
     }
 
+    /**
+     * Disconnect the datagram socket.
+     */
     public void disconnect() {
         uDPVideo.close();
     }

@@ -8,7 +8,7 @@ public class Main {
         Ihm ihm = new Ihm();
         Ctrl ctrl = new Ctrl();
         Wrk wrk = new Wrk();
-        
+
         ctrl.setRefIhm(ihm);
         ctrl.setRefWrk(wrk);
         wrk.setRefCtrl(ctrl);

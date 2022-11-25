@@ -16,7 +16,7 @@ public class Ihm implements ItfIhmCtrl {
     private boolean isAdmin;
     public IhmClientAdmin ihmClientAdmin;
     public IhmClientUser ihmClientUser;
-    public IhmError ihmError;
+
     public IhmLogin ihmLogin;
     public IhmRegister ihmRegister;
     public ItfCtrlIhm refCtrl;
@@ -25,13 +25,13 @@ public class Ihm implements ItfIhmCtrl {
         isAdmin = false;
         ihmLogin = new IhmLogin();
         ihmClientAdmin = new IhmClientAdmin();
-        ihmError = new IhmError();
+
         ihmClientUser = new IhmClientUser();
         ihmRegister = new IhmRegister();
 
         ihmClientAdmin.setLink(this);
         ihmLogin.setLink(this);
-        ihmError.setLink(this);
+
         ihmRegister.setLink(this);
         ihmClientUser.setLink(this);
 
@@ -93,7 +93,7 @@ public class Ihm implements ItfIhmCtrl {
 
     @Override
     public void alert() {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             JfxPopup.displayError("Alert", "Weather Condition", "The weather condition are not convenable");
         });
 
@@ -133,11 +133,6 @@ public class Ihm implements ItfIhmCtrl {
 
     public void showRegister() {
         ihmRegister.start();
-    }
-
-    @Override
-    public void showError(String message) {
-        ihmError.start(message);
     }
 
     @Override
@@ -195,7 +190,4 @@ public class Ihm implements ItfIhmCtrl {
         return refCtrl.connectServer(s, i);
     }
 
-    public void tryAgain() {
-        refCtrl.tryAgain();
-    }
 }//end Ihm

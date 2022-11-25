@@ -10,37 +10,35 @@ import javafx.scene.image.WritableImage;
  */
 public interface ItfIhmCtrl {
 
-	public void quit();
 
-	public void startIhm();
+    public void startIhm();
 
-	public void showImage(WritableImage wr);
+    public void showImage(WritableImage wr);
 
-	void logIn(String username, String password);
+    void logIn(String username, String password);
 
-	void showLogin();
+    void showLogin();
 
-	String getUser();
+    String getUser();
 
-	void setAdmin(boolean b);
+    void setAdmin(boolean b);
 
     boolean connnectConttroller();
 
-	void disconnectController();
+    void disconnectController();
 
-	void showError(String message);
 
     void showHumidity(double humidity);
 
-	void showClient(boolean b);
+    void showClient(boolean b);
 
-	void showTemperature(double temperature);
+    void showTemperature(double temperature);
 
     void setUser(String s);
 
-	void adminMode();
+    void adminMode();
 
     void statusServer(boolean b);
 
-	void alert();
+    void alert();
 }

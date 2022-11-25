@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a742da9-8d2e-4575-a55f-614eeaaf757c" name="Changes" comment="" />
+    <list default="true" id="4a742da9-8d2e-4575-a55f-614eeaaf757c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/beans/JfxPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/beans/JfxPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ctrl/Ctrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ctrl/Ctrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ctrl/ItfCtrlIhm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ctrl/ItfCtrlIhm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/Error.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/Ihm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ihm/Ihm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/IhmError.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/IhmLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ihm/IhmLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/IhmRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ihm/IhmRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/ihm/ItfIhmCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/ihm/ItfIhmCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/wrk/Wrk.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/wrk/Wrk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/wrk/WrkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/wrk/WrkController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/wrk/WrkPhidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/wrk/WrkPhidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/wrk/WrkSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/wrk/WrkSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/wrk/WrkUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/wrk/WrkUDP.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,14 +35,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/Projet326/Client326/Client326"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Projet326/Client326/Client326&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

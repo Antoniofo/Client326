@@ -8,23 +8,22 @@ package ctrl;
  */
 public interface ItfCtrlIhm {
 
-	public void logIn(String username, String password);
+    public void logIn(String username, String password);
 
-	public void logOut();
+    public void logOut();
 
-	public void register(String text, String txtfPasswordText);
+    public void register(String text, String txtfPasswordText);
 
-	public void tryAgain();
 
     boolean connectController();
 
-	void disconnectController();
+    void disconnectController();
 
-	void connectRobot();
+    void connectRobot();
 
-	void disconnectRobot();
+    void disconnectRobot();
 
-	void killThread();
+    void killThread();
 
     int connectServer(String s, int i);
 }

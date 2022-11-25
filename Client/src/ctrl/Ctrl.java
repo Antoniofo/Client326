@@ -46,10 +46,6 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
         refWrk.register(text, txtfPasswordText);
     }
 
-    @Override
-    public void tryAgain() {
-        refWrk.tryAgain();
-    }
 
     @Override
     public boolean connectController() {
@@ -78,7 +74,7 @@ public class Ctrl implements ItfCtrlWrk, ItfCtrlIhm {
 
     @Override
     public int connectServer(String s, int i) {
-        return refWrk.connectToServer(s,i);
+        return refWrk.connectToServer(s, i);
     }
 
     @Override

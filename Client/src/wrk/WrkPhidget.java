@@ -15,6 +15,10 @@ public class WrkPhidget {
 	private final static int VINT_HUB_SERIAL = 636313;
 	//private final static int MS_TIMEOUT = 5000;
 
+	/**
+	 * Constructor of WrkPhidget
+	 * @param refWrk reference of the wrk
+	 */
 	public WrkPhidget(ItfWrkPhidget refWrk){
 		this.refWrk = refWrk;
 
@@ -51,12 +55,5 @@ public class WrkPhidget {
 		}
 	}
 
-	/**
-	 * 
-	 * @exception Throwable
-	 */
-	public void finalize()
-	  throws Throwable{
 
-	}
 }//end WrkPhidget
