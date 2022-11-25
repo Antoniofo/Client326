@@ -56,8 +56,15 @@ public class WrkSocket extends Thread {
                     String message = readMessages();
                     if (message != null) {
                         refWrk.handleOrder(message);
+                    }else{
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                        }
                     }
-                }refWrk.statusServer(false);
+                }else{
+                    refWrk.statusServer(false);
+                }
 
             }
 
@@ -92,10 +99,8 @@ public class WrkSocket extends Thread {
                 return 0;
             } catch (Exception e) {
                 try {
-
                     socket.close();
                     socket = new Socket();
-                    JfxPopup.displayError("Error","You have been disconnected from the server.", "Disconnected from the server.");
                 } catch (IOException ex) {
                 }
                 return 2;

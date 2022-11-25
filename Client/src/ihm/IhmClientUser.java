@@ -147,4 +147,8 @@ public class IhmClientUser {
         });
 
     }
+
+    public boolean isShown() {
+        return stage.isShowing();
+    }
 }

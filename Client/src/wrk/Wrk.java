@@ -21,8 +21,6 @@ public class Wrk implements ItfWrkPhidget, ItfSocketWrk, ItfWrkController, ItfWr
     public WrkPhidget wrkPhidget;
     public WrkUDP wrkUDP;
     public ItfCtrlWrk refCtrl;
-
-
     public WrkController wrkController;
     public WrkSocket wrkSocket;
 

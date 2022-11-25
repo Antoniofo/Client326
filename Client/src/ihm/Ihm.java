@@ -1,5 +1,6 @@
 package ihm;
 
+import beans.JfxPopup;
 import ctrl.ItfCtrlIhm;
 import javafx.application.Platform;
 import javafx.scene.image.WritableImage;
@@ -81,12 +82,14 @@ public class Ihm implements ItfIhmCtrl {
 
     @Override
     public void statusServer(boolean b) {
-
-            ihmClientAdmin.setServerStatus(b);
-            ihmClientUser.setServerStatus(b);
-
-
-
+        if (!b && (ihmClientAdmin.isShown() || ihmClientUser.isShown())) {
+            Platform.runLater(() -> {
+                JfxPopup.displayError("Error","You have been disconnected from the server.", "Disconnected from the server.");
+                ihmLogin.start();
+                ihmClientAdmin.quit();
+                ihmClientUser.quit();
+            });
+        }
     }
 
     @Override

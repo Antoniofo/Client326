@@ -146,4 +146,8 @@ public class IhmClientAdmin implements Initializable {
             }
         });
     }
+
+    public boolean isShown() {
+        return stage.isShowing();
+    }
 }
