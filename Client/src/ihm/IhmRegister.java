@@ -20,9 +20,9 @@ public class IhmRegister
     @javafx.fxml.FXML
     private TextField txtfUsername;
     @javafx.fxml.FXML
-    private TextField txtfPassword;
+    private PasswordField txtfPassword;
     @javafx.fxml.FXML
-    private TextField txtfConfirmPassword;
+    private PasswordField txtfConfirmPassword;
     private Ihm link;
 
     public void setLink(Ihm link) {
